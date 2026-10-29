@@ -16,6 +16,16 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Continuous integration
+
+The frontend workflow in [`.github/workflows/frontend-ci.yml`](./.github/workflows/frontend-ci.yml)
+runs on pushes and pull requests targeting `main`. It installs the dependencies, runs
+`npm run lint`, `npm test` and `npm run build` with Node.js 24, matching the Docker image.
+
+The workflow currently uses `npm install --package-lock=false` because the lockfile is
+missing optional `@emnapi` entries and `npm ci` cannot install it yet. Once the lockfile
+is regenerated and validated, replace that step with `npm ci`.
+
 ## Integración con Confianza IPS
 
 La configuración EPS existente conserva su flujo local y ofrece una conexión server-side
