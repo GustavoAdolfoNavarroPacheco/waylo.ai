@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Manrope, Pacifico, Poppins } from "next/font/google";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { SmoothCursor } from "@/components/cursor/SmoothCursor";
@@ -6,6 +6,7 @@ import { I18nProvider } from "@/i18n/I18nProvider";
 import { getLanguageChoice, getLocale, getMessages } from "@/i18n/server";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { THEME_INIT_SCRIPT } from "@/components/theme/theme-script";
+import { PWA_DARK, PWA_LIGHT } from "@/lib/pwa";
 import { OG_LOCALES, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -21,6 +22,14 @@ const poppins = Poppins({
 const inter = Inter({ weight: "800", subsets: ["latin"], variable: "--font-inter", display: "swap" });
 const pacifico = Pacifico({ weight: "400", subsets: ["latin"], variable: "--font-pacifico", display: "swap" });
 
+// The browser bar of a phone takes the color of the page's surface, in each scheme.
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: PWA_LIGHT },
+    { media: "(prefers-color-scheme: dark)", color: PWA_DARK },
+  ],
+};
+
 export async function generateMetadata(): Promise<Metadata> {
   const { locale, t } = await getMessages();
   return {
@@ -28,6 +37,8 @@ export async function generateMetadata(): Promise<Metadata> {
     title: { default: t.meta.siteTitle, template: "%s | Waylo.ai" },
     description: t.meta.siteDescription,
     applicationName: "Waylo",
+    // Opened from the iOS home screen it runs as an app, under the name "Waylo".
+    appleWebApp: { capable: true, title: "Waylo", statusBarStyle: "default" },
     // "./" is each page's own address, so every page names itself as the canonical one.
     alternates: { canonical: "./" },
     openGraph: {
