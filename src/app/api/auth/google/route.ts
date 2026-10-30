@@ -18,6 +18,8 @@ export async function GET(request: Request) {
   }).toString();
 
   const response = NextResponse.redirect(url);
+  // A redirect to Google is not a page: it has nothing to index or follow.
+  response.headers.set("X-Robots-Tag", "noindex, nofollow");
   response.cookies.set(OAUTH_STATE_COOKIE, state, {
     httpOnly: true,
     sameSite: "lax",

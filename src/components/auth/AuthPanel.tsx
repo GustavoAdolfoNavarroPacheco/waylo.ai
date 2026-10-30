@@ -364,13 +364,16 @@ export function AuthPanel({ initialMode, googleError }: { initialMode: AuthMode;
           <span className="h-px flex-1 bg-border-strong/40" />
         </div>
 
-        {/* A full page navigation: the server starts the Google sign-in and brings the person back to the chat. */}
-        <a href="/api/auth/google" className={cn(buttonSoft, "h-12 w-full gap-3")}>
-          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-            <path fill="currentColor" d="M21.35 11.1H12v2.98h5.35c-.23 1.5-1.7 4.4-5.35 4.4a5.9 5.9 0 1 1 0-11.8c1.9 0 3.17.8 3.9 1.5l2.66-2.57C16.9 3.6 14.7 2.6 12 2.6a9.4 9.4 0 1 0 0 18.8c5.43 0 9-3.8 9-9.2 0-.62-.07-1.1-.15-1.1Z" />
-          </svg>
-          {t.auth.google}
-        </a>
+        {/* A full page navigation: the server starts the Google sign-in and brings the person back to the chat.
+            It is a form and not a link so crawlers do not follow it: it is a redirect to Google, not a page. */}
+        <form action="/api/auth/google" method="get">
+          <button type="submit" className={cn(buttonSoft, "h-12 w-full gap-3")}>
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+              <path fill="currentColor" d="M21.35 11.1H12v2.98h5.35c-.23 1.5-1.7 4.4-5.35 4.4a5.9 5.9 0 1 1 0-11.8c1.9 0 3.17.8 3.9 1.5l2.66-2.57C16.9 3.6 14.7 2.6 12 2.6a9.4 9.4 0 1 0 0 18.8c5.43 0 9-3.8 9-9.2 0-.62-.07-1.1-.15-1.1Z" />
+            </svg>
+            {t.auth.google}
+          </button>
+        </form>
 
         <p className="mt-4 text-center text-caption text-text-muted short:mt-2">
           {t.auth.legalLead}{" "}
