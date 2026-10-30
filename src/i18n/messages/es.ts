@@ -36,13 +36,37 @@ export const es = {
     goToChat: "Ir al Chat",
     mascotLabel: "Mascota de Waylo",
     levelsNav: "Niveles de atención",
-    features: [
-      { title: "Respuesta rápida", text: "en minutos" },
-      { title: "Orientación clara", text: "según tus síntomas" },
-      { title: "Tu salud primero", text: "siempre" },
-    ],
     about: {
       stepsTitle: "Cómo funciona Waylo",
+      stepsIntro:
+        "Cuéntale a Waylo cómo te sientes. Primero revisa las {0}; después te orienta hacia {1}, {2} o {3}, y te explica {4}.",
+      highlights: [
+        {
+          label: "señales de alarma",
+          title: "Lo urgente va primero",
+          text: "Antes de cualquier pregunta, Waylo busca señales que no pueden esperar, como dolor en el pecho o dificultad grave para respirar.",
+        },
+        {
+          label: "Urgencias",
+          title: "Cuando no se puede esperar",
+          text: "Si hay una señal de peligro, te lo decimos de inmediato y te indicamos acudir al centro de Urgencias más cercano.",
+        },
+        {
+          label: "Consulta Prioritaria",
+          title: "Que te vean pronto",
+          text: "Para malestares que necesitan la valoración de un profesional pronto, aunque no sean una emergencia.",
+        },
+        {
+          label: "Medicina General",
+          title: "Una cita programada",
+          text: "Para molestias leves o seguimientos que se pueden atender con una cita médica.",
+        },
+        {
+          label: "qué documentos llevar",
+          title: "Llega preparado",
+          text: "Te indicamos qué documentos y órdenes llevar para que tu visita sea más ágil.",
+        },
+      ],
       steps: [
         {
           title: "Cuéntanos cómo te sientes",
@@ -57,22 +81,10 @@ export const es = {
           text: "Te explicamos a qué nivel de atención conviene acudir, por qué y qué documentos llevar, en pocas líneas y sin tecnicismos.",
         },
       ],
-      levelsTitle: "Los tres niveles de atención",
-      levels: [
-        {
-          title: "Urgencias",
-          text: "Para situaciones que no pueden esperar, como dolor en el pecho, dificultad grave para respirar o pérdida del conocimiento. Acude al centro de Urgencias más cercano o llama a la línea de emergencias de tu ciudad.",
-        },
-        {
-          title: "Consulta Prioritaria",
-          text: "Para malestares que necesitan ser vistos pronto por un profesional de la salud, aunque no sean una emergencia.",
-        },
-        {
-          title: "Medicina General",
-          text: "Para molestias leves o seguimientos que se pueden atender con una cita médica programada.",
-        },
-      ],
       faqTitle: "Preguntas frecuentes",
+      chatGreeting: "¡Hola! Soy Waylo. Toca una pregunta y te la respondo.",
+      chatStatus: "En línea",
+      typingLabel: "Waylo está escribiendo",
       faqs: [
         {
           question: "¿Waylo me da un diagnóstico?",
@@ -85,9 +97,19 @@ export const es = {
             "No. Waylo no sustituye la consulta médica ni la atención de urgencias. Si sientes que algo es grave, acude a Urgencias sin esperar.",
         },
         {
+          question: "¿Cómo sé si lo mío es una emergencia?",
+          answer:
+            "Si sientes dolor u opresión en el pecho, falta de aire grave, debilidad repentina de un lado del cuerpo, sangrado que no para o pensamientos de hacerte daño, acude a Urgencias o llama de inmediato a la línea de emergencias de tu ciudad.",
+        },
+        {
           question: "¿Necesito una cuenta para usarlo?",
           answer:
             "No. Puedes probar el chat sin crear una cuenta, con unas cuantas respuestas gratuitas. Con una cuenta registrada tienes más respuestas disponibles.",
+        },
+        {
+          question: "¿Puedo ver mis citas en Waylo?",
+          answer:
+            "Sí, si conectas tu cuenta con tu IPS desde la configuración. Waylo te muestra tus citas y te ayuda a gestionarlas, siempre con tu confirmación.",
         },
         {
           question: "¿Qué pasa con mis datos?",
@@ -98,6 +120,14 @@ export const es = {
       disclaimer:
         "Waylo es una herramienta de orientación. No es un servicio médico ni sustituye la valoración de un profesional de la salud.",
     },
+  },
+  footer: {
+    tagline: "Orientación clara para saber a qué nivel de atención acudir. Sin diagnósticos ni recetas.",
+    productTitle: "Waylo",
+    accountTitle: "Cuenta",
+    legalTitle: "Legal",
+    copyright: (year: number) => `© ${year} Waylo. Todos los derechos reservados.`,
+    backToTop: "Volver arriba",
   },
 
   levels: {

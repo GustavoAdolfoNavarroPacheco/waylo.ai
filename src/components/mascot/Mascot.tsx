@@ -175,6 +175,8 @@ export function Mascot({ state, size = 120, className, label }: MascotProps) {
     gloss: `${uid}-gloss`,
     bounce: `${uid}-bounce`,
     shadow: `${uid}-shadow`,
+    halo: `${uid}-halo`,
+    rim: `${uid}-rim`,
   };
 
   return (
@@ -191,23 +193,33 @@ export function Mascot({ state, size = 120, className, label }: MascotProps) {
       focusable="false"
     >
       <defs>
+        {/* The sphere's tones come from theme tokens: deeper shading, a rim light and a halo in dark mode. */}
         <radialGradient id={ids.body} cx="36%" cy="28%" r="78%">
-          <stop offset="0" stopColor="#ffffff" />
-          <stop offset="0.38" stopColor="#f4f4f4" />
-          <stop offset="0.78" stopColor="#d2d2d2" />
-          <stop offset="1" stopColor="#a6a6a6" />
+          <stop offset="0" style={{ stopColor: "var(--mascot-s0, #ffffff)" }} />
+          <stop offset="0.38" style={{ stopColor: "var(--mascot-s1, #f4f4f4)" }} />
+          <stop offset="0.78" style={{ stopColor: "var(--mascot-s2, #d2d2d2)" }} />
+          <stop offset="1" style={{ stopColor: "var(--mascot-s3, #a6a6a6)" }} />
         </radialGradient>
         <radialGradient id={ids.gloss} cx="50%" cy="50%" r="50%">
           <stop offset="0" stopColor="#ffffff" stopOpacity="0.95" />
           <stop offset="1" stopColor="#ffffff" stopOpacity="0" />
         </radialGradient>
         <radialGradient id={ids.bounce} cx="50%" cy="50%" r="50%">
-          <stop offset="0" stopColor="#ffffff" stopOpacity="0.55" />
+          <stop offset="0" stopColor="#ffffff" style={{ stopOpacity: "var(--mascot-bounce, 0.55)" }} />
           <stop offset="1" stopColor="#ffffff" stopOpacity="0" />
         </radialGradient>
         <radialGradient id={ids.shadow} cx="50%" cy="50%" r="50%">
-          <stop offset="0" stopColor="#000000" stopOpacity="0.34" />
-          <stop offset="1" stopColor="#000000" stopOpacity="0" />
+          <stop offset="0" style={{ stopColor: "var(--mascot-ground, #000000)", stopOpacity: "var(--mascot-ground-opacity, 0.34)" }} />
+          <stop offset="1" style={{ stopColor: "var(--mascot-ground, #000000)", stopOpacity: 0 }} />
+        </radialGradient>
+        <radialGradient id={ids.halo} cx="50%" cy="50%" r="50%">
+          <stop offset="0.7" stopColor="#ffffff" stopOpacity="1" />
+          <stop offset="1" stopColor="#ffffff" stopOpacity="0" />
+        </radialGradient>
+        {/* Rim light: a soft glow that builds toward the edge opposite the light, with no hard line. */}
+        <radialGradient id={ids.rim} cx="36%" cy="28%" r="100%">
+          <stop offset="0.5" stopColor="#ffffff" stopOpacity="0" />
+          <stop offset="0.76" stopColor="#ffffff" stopOpacity="1" />
         </radialGradient>
       </defs>
 
@@ -221,8 +233,10 @@ export function Mascot({ state, size = 120, className, label }: MascotProps) {
       />
 
       <g ref={bodyRef}>
+        <circle cx="60" cy="58" r="62" fill={`url(#${ids.halo})`} style={{ opacity: "var(--mascot-halo, 0)" }} />
         <circle cx="60" cy="58" r="46" fill={`url(#${ids.body})`} />
         <ellipse cx="60" cy="90" rx="26" ry="12" fill={`url(#${ids.bounce})`} />
+        <circle cx="60" cy="58" r="46" fill={`url(#${ids.rim})`} style={{ opacity: "var(--mascot-rim, 0)" }} />
         <ellipse cx="44" cy="31" rx="19" ry="11" transform="rotate(-28 44 31)" fill={`url(#${ids.gloss})`} />
 
         <g ref={gazeRef}>

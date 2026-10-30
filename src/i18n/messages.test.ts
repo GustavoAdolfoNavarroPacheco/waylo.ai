@@ -5,7 +5,7 @@ import { es } from "@/i18n/messages/es";
 
 type Node = unknown;
 
-/** Every path to a text in the dictionary, such as "chat.send" or "home.features.0.title". */
+/** Every path to a text in the dictionary, such as "chat.send" or "home.intro". */
 function leaves(node: Node, path = ""): string[] {
   if (typeof node === "function") return [path];
   if (Array.isArray(node)) return node.flatMap((item, index) => leaves(item, `${path}.${index}`));
@@ -53,10 +53,9 @@ describe("dictionaries", () => {
     }
   });
 
-  it("keep the password strength levels and the home features in the numbers the screens expect", () => {
+  it("keep the password strength levels in the number the screens expect", () => {
     for (const locale of LOCALES) {
       expect(messages[locale].auth.strength.levels, locale).toHaveLength(5);
-      expect(messages[locale].home.features, locale).toHaveLength(3);
       expect(messages[locale].server.checklist.length, locale).toBeGreaterThan(0);
     }
   });

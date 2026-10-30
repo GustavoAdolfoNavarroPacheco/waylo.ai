@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Manrope, Pacifico, Poppins } from "next/font/google";
+import { Inter, Manrope, Pacifico, Poppins } from "next/font/google";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { SmoothCursor } from "@/components/cursor/SmoothCursor";
 import { I18nProvider } from "@/i18n/I18nProvider";
 import { getLanguageChoice, getLocale, getMessages } from "@/i18n/server";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
@@ -16,6 +17,8 @@ const poppins = Poppins({
   variable: "--font-poppins",
   display: "swap",
 });
+// Inter, at extra bold only: it is the fallback of the section titles where the system face is not San Francisco.
+const inter = Inter({ weight: "800", subsets: ["latin"], variable: "--font-inter", display: "swap" });
 const pacifico = Pacifico({ weight: "400", subsets: ["latin"], variable: "--font-pacifico", display: "swap" });
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -50,10 +53,11 @@ export default async function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
       </head>
-      <body className={`${manrope.variable} ${poppins.variable} ${pacifico.variable} antialiased`}>
+      <body className={`${manrope.variable} ${poppins.variable} ${pacifico.variable} ${inter.variable} antialiased`}>
         <I18nProvider locale={locale} choice={choice}>
           <ThemeProvider>
             <SmoothScroll />
+            <SmoothCursor />
             {children}
           </ThemeProvider>
         </I18nProvider>

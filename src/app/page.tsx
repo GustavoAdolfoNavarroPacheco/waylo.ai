@@ -5,6 +5,7 @@ import { ArrowRight02Icon } from "@hugeicons/core-free-icons";
 import { Hero } from "@/components/home/Hero";
 import { HeroDecor } from "@/components/home/HeroDecor";
 import { HomeAbout } from "@/components/home/HomeAbout";
+import { SiteFooter } from "@/components/home/SiteFooter";
 import { ThemeToggle } from "@/components/theme";
 import { buttonPrimary } from "@/components/ui/buttons";
 import { getMessages } from "@/i18n/server";
@@ -28,7 +29,7 @@ export default async function HomePage() {
   const chatHref = "/chat";
 
   return (
-    <div className="bg-surface text-text">
+    <div id="home-top" className="bg-surface text-text">
       <link rel="canonical" href={`${SITE_URL}/`} />
       <script
         type="application/ld+json"
@@ -38,13 +39,15 @@ export default async function HomePage() {
       />
       <section className="relative isolate flex min-h-dvh flex-col lg:h-dvh">
         <HeroDecor />
+        {/* The first screen melts into the page: the waves and leaves fade out before the next section starts. */}
+        <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[min(16rem,32%)] bg-linear-to-b from-transparent to-surface" />
         <header className={cn(column, "relative z-10 flex shrink-0 items-center justify-between gap-4 py-5")}>
           {/* The script W's ink starts right of its box; this margin (beyond the utility's own) lines it up with the column. */}
           <span className="font-script text-4xl text-title-gradient" style={{ marginLeft: "-0.31em" }}>
             Waylo
           </span>
           <div className="flex items-center gap-3">
-            <Link href={chatHref} className={cn(buttonPrimary, "group h-12 gap-2 px-5 text-base")}>
+            <Link href={chatHref} className={cn(buttonPrimary, "group h-12 gap-2 rounded-full px-5 text-base")}>
               {t.home.goToChat}
               <HugeiconsIcon
                 icon={ArrowRight02Icon}
@@ -64,6 +67,7 @@ export default async function HomePage() {
       </section>
 
       <HomeAbout t={t} />
+      <SiteFooter t={t} />
     </div>
   );
 }

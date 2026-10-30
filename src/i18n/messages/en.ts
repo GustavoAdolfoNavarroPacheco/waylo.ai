@@ -34,13 +34,37 @@ export const en: Messages = {
     goToChat: "Go to Chat",
     mascotLabel: "Waylo's mascot",
     levelsNav: "Levels of care",
-    features: [
-      { title: "Fast answers", text: "in minutes" },
-      { title: "Clear guidance", text: "based on your symptoms" },
-      { title: "Your health first", text: "always" },
-    ],
     about: {
       stepsTitle: "How Waylo works",
+      stepsIntro:
+        "Tell Waylo how you feel. First it checks for {0}; then it points you to {1}, {2} or {3}, and explains {4}.",
+      highlights: [
+        {
+          label: "warning signs",
+          title: "Urgent things come first",
+          text: "Before any question, Waylo looks for signs that cannot wait, such as chest pain or severe difficulty breathing.",
+        },
+        {
+          label: "Emergency Care",
+          title: "When it cannot wait",
+          text: "If there is a sign of danger, we tell you right away and ask you to go to the nearest emergency room.",
+        },
+        {
+          label: "Priority Consultation",
+          title: "Get seen soon",
+          text: "For discomfort that needs to be seen soon by a professional, even if it is not an emergency.",
+        },
+        {
+          label: "General Medicine",
+          title: "A scheduled appointment",
+          text: "For mild complaints or follow-ups that can be handled with a medical appointment.",
+        },
+        {
+          label: "which documents to bring",
+          title: "Arrive prepared",
+          text: "We tell you which documents and orders to bring so your visit goes faster.",
+        },
+      ],
       steps: [
         {
           title: "Tell us how you feel",
@@ -55,22 +79,10 @@ export const en: Messages = {
           text: "We explain which level of care to go to, why, and which documents to bring, in a few lines and without jargon.",
         },
       ],
-      levelsTitle: "The three levels of care",
-      levels: [
-        {
-          title: "Emergency Care",
-          text: "For situations that cannot wait, such as chest pain, severe difficulty breathing or loss of consciousness. Go to the nearest emergency room or call your city's emergency line.",
-        },
-        {
-          title: "Priority Consultation",
-          text: "For discomfort that needs to be seen soon by a health professional, even if it is not an emergency.",
-        },
-        {
-          title: "General Medicine",
-          text: "For mild complaints or follow-ups that can be handled with a scheduled medical appointment.",
-        },
-      ],
       faqTitle: "Frequently asked questions",
+      chatGreeting: "Hi! I am Waylo. Tap a question and I will answer it.",
+      chatStatus: "Online",
+      typingLabel: "Waylo is typing",
       faqs: [
         {
           question: "Does Waylo give me a diagnosis?",
@@ -83,9 +95,19 @@ export const en: Messages = {
             "No. Waylo does not replace a medical consultation or emergency care. If you feel something is serious, go to Emergency Care without waiting.",
         },
         {
+          question: "How do I know if it is an emergency?",
+          answer:
+            "If you feel chest pain or pressure, severe shortness of breath, sudden weakness on one side of the body, bleeding that will not stop or thoughts of harming yourself, go to Emergency Care or call your city's emergency line right away.",
+        },
+        {
           question: "Do I need an account to use it?",
           answer:
             "No. You can try the chat without an account, with a few free replies. With a registered account you get more replies.",
+        },
+        {
+          question: "Can I see my appointments in Waylo?",
+          answer:
+            "Yes, if you connect your account to your provider from the settings. Waylo shows your appointments and helps you manage them, always with your confirmation.",
         },
         {
           question: "What happens to my data?",
@@ -96,6 +118,14 @@ export const en: Messages = {
       disclaimer:
         "Waylo is a guidance tool. It is not a medical service and does not replace an assessment by a health professional.",
     },
+  },
+  footer: {
+    tagline: "Clear guidance on which level of care to go to. No diagnoses or prescriptions.",
+    productTitle: "Waylo",
+    accountTitle: "Account",
+    legalTitle: "Legal",
+    copyright: (year: number) => `© ${year} Waylo. All rights reserved.`,
+    backToTop: "Back to top",
   },
 
   levels: {
