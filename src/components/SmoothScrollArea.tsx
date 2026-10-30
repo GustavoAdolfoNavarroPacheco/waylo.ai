@@ -8,6 +8,8 @@ import { SMOOTH_AREA_ATTRIBUTE, SMOOTH_SCROLL } from "@/components/SmoothScroll"
 interface SmoothScrollApi {
   /** Glides to the end of the area. `immediate` jumps there, for the first paint of a conversation. */
   scrollToEnd: (immediate?: boolean) => void;
+  /** Glides just far enough to bring an element fully into view, leaving `padding` px around it. Does nothing if it already is. */
+  scrollIntoView: (target: HTMLElement, padding?: number) => void;
 }
 
 const SmoothScrollContext = createContext<SmoothScrollApi | null>(null);
@@ -110,7 +112,26 @@ export function SmoothScrollArea({ className, contentClassName, overlay, childre
     el?.scrollTo({ top: el.scrollHeight, behavior: immediate || prefersReducedMotion() ? "auto" : "smooth" });
   }, []);
 
-  const api = useMemo(() => ({ scrollToEnd }), [scrollToEnd]);
+  const scrollIntoView = useCallback((target: HTMLElement, padding = 20) => {
+    const box = wrapper.current;
+    if (!box) return;
+    const area = box.getBoundingClientRect();
+    const rect = target.getBoundingClientRect();
+    let delta = 0;
+    if (rect.bottom > area.bottom - padding) delta = rect.bottom - (area.bottom - padding);
+    // When it is taller than the area, its top wins, so the start of it is what the reader sees.
+    if (rect.top - delta < area.top + padding) delta = rect.top - (area.top + padding);
+    if (Math.abs(delta) < 1) return;
+    const top = Math.max(0, box.scrollTop + delta);
+    const lenis = lenisRef.current;
+    if (lenis) {
+      lenis.scrollTo(top);
+      return;
+    }
+    box.scrollTo({ top, behavior: prefersReducedMotion() ? "auto" : "smooth" });
+  }, []);
+
+  const api = useMemo(() => ({ scrollToEnd, scrollIntoView }), [scrollToEnd, scrollIntoView]);
 
   return (
     <SmoothScrollContext.Provider value={api}>
