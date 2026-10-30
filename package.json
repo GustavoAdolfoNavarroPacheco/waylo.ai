@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
-    "db:migrate": "node --env-file=.env.local scripts/migrate.mjs"
+    "db:migrate": "node --env-file=.env.local scripts/migrate.mjs",
+    "prepare": "node -e \"try{require('child_process').execSync('git config core.hooksPath .githooks',{stdio:'ignore'});require('fs').chmodSync('.githooks/commit-msg',0o755)}catch(e){}\""
   },
   "dependencies": {
     "@ai-sdk/openai": "^4.0.98",

@@ -1,0 +1,2 @@
+# The hook is run by sh, which cannot read CRLF line endings.
+.githooks/* text eol=lf

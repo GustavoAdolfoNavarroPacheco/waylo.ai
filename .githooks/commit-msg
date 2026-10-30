@@ -1,0 +1,4 @@
+#!/bin/sh
+# Rejects a commit whose message breaks the project rules. The rules live in scripts/check-commit-message.mjs.
+# Turned on by `npm install` (the "prepare" script) or by hand with: git config core.hooksPath .githooks
+exec node "$(dirname "$0")/../scripts/check-commit-message.mjs" --file "$1"

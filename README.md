@@ -89,3 +89,22 @@ contraseñas en URLs, tokens, claves largas y correos; nunca se envía el texto 
 El mismo error del mismo sitio se manda una vez por minuto (con el conteo de repeticiones
 omitidas) y nunca más de 20 mensajes por minuto. En desarrollo local no se envía nada.
 Para reportar un error a mano en una ruta: `reportError("api/mi-ruta", error)` de `@/lib/error-report`.
+
+## Convención de commits
+
+Cada commit se escribe como `tipo: descripción`, todo en minúsculas, en inglés y sin emojis ni códigos
+como `:memo:`. Los tipos válidos son `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`,
+`ci`, `chore` y `revert`; con alcance opcional: `fix(chat): keep the draft when the reply fails`.
+
+Se comprueba en dos sitios con el mismo script, [`scripts/check-commit-message.mjs`](./scripts/check-commit-message.mjs),
+que no necesita dependencias:
+
+- **Hook `commit-msg` (en tu equipo).** Rechaza el commit antes de crearlo. `npm install` lo activa solo
+  (script `prepare`); si usas `--ignore-scripts`, actívalo a mano con `git config core.hooksPath .githooks`.
+  Se puede saltar con `--no-verify`, por eso existe el siguiente.
+- **Check de pull request (en GitHub).** El workflow `Commit messages` revisa los commits de cada pull request.
+  Para que bloquee la fusión, marca el check `Conventional commits` como obligatorio en
+  *Settings → Branches → Branch protection rules → main*.
+
+Si el check falla, reescribe los mensajes con `git rebase -i` (opción `reword`) y sube con `git push --force-with-lease`.
+Los merges que escribe GitHub no se revisan.
