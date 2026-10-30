@@ -396,6 +396,24 @@ body {
     ) {
     cursor: text !important;
   }
+
+  /* While the theme changes, the page is covered by the view transition's own layers, which the rule above does not reach. */
+  html[data-smooth-cursor]::view-transition,
+  html[data-smooth-cursor]::view-transition-group(*),
+  html[data-smooth-cursor]::view-transition-image-pair(*),
+  html[data-smooth-cursor]::view-transition-old(*),
+  html[data-smooth-cursor]::view-transition-new(*) {
+    cursor: none !important;
+  }
+}
+
+/* The cursor is kept out of the theme crossfade: no frozen copy of it fades out where it was when the theme changed. */
+::view-transition-group(smooth-cursor) {
+  animation: none;
+}
+
+::view-transition-old(smooth-cursor) {
+  display: none;
 }
 
 /*

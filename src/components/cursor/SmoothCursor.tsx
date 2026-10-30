@@ -8,7 +8,8 @@ import { headingOf, shortestTurn } from "./angle";
 /** Follows the pointer with a little lag, and turns toward where it is going. Attribute the page styles key on. */
 const ACTIVE_ATTRIBUTE = "data-smooth-cursor";
 
-const FOLLOW = { damping: 45, stiffness: 400, mass: 1, restDelta: 0.001 };
+// Stiff and almost critically damped (2 * sqrt(stiffness) = 63): it catches the pointer fast and does not overshoot.
+const FOLLOW = { damping: 60, stiffness: 1000, mass: 1, restDelta: 0.001 };
 const TURN = { damping: 60, stiffness: 300, mass: 1 };
 const SCALE = { stiffness: 500, damping: 35, mass: 1 };
 const FADE = { stiffness: 600, damping: 40, mass: 1 };
@@ -129,7 +130,7 @@ export function SmoothCursor() {
     <motion.div
       aria-hidden
       className="pointer-events-none fixed left-0 top-0 z-[9999] -ml-[15px] -mt-4 text-text"
-      style={{ x, y, rotate, scale, opacity, willChange: "transform" }}
+      style={{ x, y, rotate, scale, opacity, willChange: "transform", viewTransitionName: "smooth-cursor" }}
     >
       <svg width="30" height="32" viewBox="0 0 50 54" fill="none" style={{ filter: "drop-shadow(0 2px 3px var(--shadow-deep))" }}>
         {/* A thick round stroke is what softens the corners: the arrow is drawn small, then fattened by its own stroke. */}
