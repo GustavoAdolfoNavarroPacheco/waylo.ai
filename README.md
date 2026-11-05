@@ -51,6 +51,10 @@ Configuración → Memoria. La tabla se crea al ejecutar `npm run db:migrate`; l
 `WAYLO_BACKEND_URL` y `WAYLO_BACKEND_KEY` deben existir únicamente en el entorno server-side.
 El diseño y los contratos están en [`docs/003-chat-ips-tools-memory-prd.md`](./docs/003-chat-ips-tools-memory-prd.md).
 
+El avance de la semana 2 (herramientas reales, reintentos y registro de ejecuciones)
+está documentado en [`docs/005-hackathon-s2-delivery.md`](./docs/005-hackathon-s2-delivery.md)
+y en el repositorio compañero [`waylo.ai-backend`](https://github.com/GustavoAdolfoNavarroPacheco/waylo.ai-backend).
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
