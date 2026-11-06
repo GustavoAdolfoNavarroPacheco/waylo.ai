@@ -1,0 +1,19 @@
+{
+  "generated_at": "2026-11-05T17:42:45.868Z",
+  "runs": 10,
+  "audited": 10,
+  "succeeded": 10,
+  "tools_used": [
+    "find_earliest_availability",
+    "get_patient_profile",
+    "list_appointment_catalog",
+    "list_my_appointments"
+  ],
+  "retries_recorded": [
+    {
+      "run": 4,
+      "retry_count": 1
+    }
+  ],
+  "problems": []
+}
