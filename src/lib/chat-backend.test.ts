@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { ChatBackendError, completeWithWayloBackend } from "@/lib/chat-backend";
+import { completeWithWayloBackend } from "@/lib/chat-backend";
 
 const fetchMock = vi.fn();
 
@@ -49,7 +49,7 @@ describe("completeWithWayloBackend", () => {
       temperature: 0.4,
       system: "x",
       messages: [{ role: "user", content: "x" }],
-    })).rejects.toMatchObject<Partial<ChatBackendError>>({ code: "UNAUTHORIZED", status: 401 });
+    })).rejects.toMatchObject({ code: "UNAUTHORIZED", status: 401 });
   });
 
   it("fails closed when the private integration is not configured", async () => {

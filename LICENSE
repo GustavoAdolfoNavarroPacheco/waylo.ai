@@ -1,0 +1,39 @@
+Waylo.ai: licencia propietaria / Proprietary license
+
+Copyright (c) 2026 Waylo.ai y sus colaboradores. Todos los derechos reservados.
+Copyright (c) 2026 Waylo.ai and its contributors. All rights reserved.
+
+ES
+Este repositorio es público para que pueda consultarse, pero el código, el diseño, los textos, las imágenes, la mascota y
+la marca "Waylo" NO se ofrecen bajo una licencia de código abierto. Sin permiso previo y por escrito de los titulares,
+no está permitido copiar, modificar, distribuir, sublicenciar, vender ni usar este material, en todo o en parte, en
+productos o servicios propios o de terceros.
+
+Se permite, sin necesidad de pedir permiso:
+  - leer el código y la documentación;
+  - clonar el repositorio para evaluarlo o revisarlo;
+  - ejecutarlo localmente para probarlo;
+  - proponer cambios mediante pull request (ver CONTRIBUTING.md). Al hacerlo, quien contribuye concede a los titulares
+    el derecho a usar, modificar y distribuir esa contribución como parte del proyecto.
+
+El software se entrega "tal cual", sin garantía de ningún tipo. Waylo orienta, no diagnostica ni receta, y no sustituye
+la valoración de un profesional de la salud. Los titulares no responden por daños derivados de su uso.
+
+EN
+This repository is public so that it can be read, but the code, design, copy, images, mascot and the "Waylo" name are NOT
+offered under an open source license. Without the prior written permission of the rights holders you may not copy,
+modify, distribute, sublicense, sell or use this material, in whole or in part, in your own or third-party products or
+services.
+
+Without asking for permission you may:
+  - read the code and the documentation;
+  - clone the repository to evaluate or review it;
+  - run it locally to try it out;
+  - propose changes through a pull request (see CONTRIBUTING.md). By doing so, the contributor grants the rights holders
+    the right to use, modify and distribute that contribution as part of the project.
+
+The software is provided "as is", without warranty of any kind. Waylo guides; it does not diagnose or prescribe, and it
+does not replace the assessment of a health professional. The rights holders are not liable for damages arising from its use.
+
+Third-party components keep their own licenses (see package.json and each package). / Los componentes de terceros
+conservan sus propias licencias (ver package.json y cada paquete).

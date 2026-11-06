@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Reportar una vulnerabilidad (privado)
+    url: https://github.com/GustavoAdolfoNavarroPacheco/waylo.ai/security/advisories/new
+    about: Usa el reporte privado; no publiques los detalles en una incidencia.
+  - name: Documentación
+    url: https://github.com/GustavoAdolfoNavarroPacheco/waylo.ai/tree/main/docs
+    about: Arquitectura, integración con la IPS, pruebas y despliegue.

@@ -1,0 +1,178 @@
+<!doctype html>
+<!--
+  Source of the README banner and the GitHub social preview. It uses the web's own tokens, fonts and mascot.
+  Open it with query parameters, e.g. banner.html?theme=dark&variant=banner  (variant: banner 2400x800 | social 1280x640).
+  The PNGs next to this folder are screenshots of it; see ../README.md to regenerate them.
+-->
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Waylo.ai banner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@800&family=Manrope:wght@500;600&family=Pacifico&family=Poppins:wght@500;600&display=block" rel="stylesheet" />
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body { background: #888; }
+
+      /* ---- tokens: src/app/globals.css ---------------------------------------------------------------------------- */
+      .stage {
+        --surface:#f1f1f1; --surface-raised:#ffffff; --border:#dcdcdc; --text:#0a0a0a; --text-muted:#585858;
+        --danger:#000000; --danger-fg:#ffffff; --warning:#3f3f3f; --warning-fg:#ffffff; --success:#6a6a6a; --success-fg:#ffffff;
+        --shadow-ambient:rgb(0 0 0 / .07); --shadow-key:rgb(0 0 0 / .1); --shadow-deep:rgb(0 0 0 / .22); --shadow-highlight:rgb(255 255 255 / .95);
+        --title-from:#000000; --title-to:#5c5c5c; --title-depth:#b4b4b4;
+        --leaf-a:#7a7a7a; --leaf-b:#c6c6c6;
+        --mascot-s0:#ffffff; --mascot-s1:#f4f4f4; --mascot-s2:#d2d2d2; --mascot-s3:#a6a6a6;
+        --mascot-rim:0; --mascot-halo:0; --mascot-gloss:0; --mascot-ground:#000000; --mascot-ground-opacity:.34;
+        --blob:rgb(0 0 0 / .07); --wave-a:rgb(255 255 255 / .55); --wave-b:rgb(0 0 0 / .035);
+      }
+      .stage.dark {
+        --surface:#0b0b0b; --surface-raised:#171717; --border:#2a2a2a; --text:#f5f5f5; --text-muted:#a6a6a6;
+        --danger:#ffffff; --danger-fg:#000000; --warning:#cfcfcf; --warning-fg:#000000; --success:#9a9a9a; --success-fg:#000000;
+        --shadow-ambient:rgb(0 0 0 / .4); --shadow-key:rgb(0 0 0 / .5); --shadow-deep:rgb(0 0 0 / .7); --shadow-highlight:rgb(255 255 255 / .07);
+        --title-from:#ffffff; --title-to:#8f8f8f; --title-depth:#3d3d3d;
+        --leaf-a:#3c3c3c; --leaf-b:#222222;
+        --mascot-s0:#ffffff; --mascot-s1:#ececec; --mascot-s2:#9e9e9e; --mascot-s3:#484848;
+        --mascot-rim:.4; --mascot-halo:.16; --mascot-gloss:.9; --mascot-ground:#ffffff; --mascot-ground-opacity:.14;
+        --blob:rgb(255 255 255 / .055); --wave-a:rgb(255 255 255 / .035); --wave-b:rgb(0 0 0 / .35);
+      }
+
+      .stage { position: relative; overflow: hidden; background: var(--surface); color: var(--text); font-family: 'Manrope', 'Segoe UI', sans-serif; }
+      .banner { width: 2400px; height: 800px; }
+      .social { width: 1280px; height: 640px; }
+      .layer { position: absolute; inset: 0; }
+
+      /* ---- depth: light pool, big shapes, waves, leaves ---------------------------------------------------------- */
+      .pool { background: radial-gradient(60% 90% at 72% 46%, var(--surface-raised) 0%, transparent 70%); opacity: .75; }
+      .stage.dark .pool { background: radial-gradient(52% 80% at 72% 46%, rgb(255 255 255 / .07) 0%, transparent 70%); opacity: 1; }
+      .blob { position: absolute; border-radius: 46% 54% 52% 48% / 52% 46% 54% 48%; background: var(--blob); }
+      .banner .blob { left: 1330px; top: 70px; width: 700px; height: 700px; }
+      .social .blob { left: 735px; top: 100px; width: 420px; height: 420px; }
+      .paper { position: absolute; width: 230px; padding: 26px; border-radius: 24px; background: var(--surface-raised); opacity: .72;
+        box-shadow: 0 2px 4px var(--shadow-ambient), 0 18px 44px var(--shadow-key), inset 0 1px 0 var(--shadow-highlight); }
+      .paper i { display: block; height: 12px; border-radius: 99px; background: var(--text); opacity: .1; margin-top: 13px; }
+      .paper i:nth-child(2) { width: 82%; } .paper i:nth-child(3) { width: 62%; } .paper i:nth-child(4) { width: 70%; opacity: .07; }
+      .paper svg { width: 44px; height: 44px; stroke: var(--text); opacity: .25; fill: none; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+      .banner .paper.p1 { left: -60px; top: 70px; transform: rotate(-17deg); }
+      .banner .paper.p2 { left: 2150px; top: 560px; transform: rotate(15deg); }
+      .social .paper.p1 { left: -70px; top: 40px; transform: rotate(-17deg); width: 190px; }
+      .social .paper.p2 { left: 1130px; top: 470px; transform: rotate(15deg); width: 190px; }
+      .waves { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; }
+      .plant { position: absolute; filter: blur(9px); opacity: .6; }
+      .banner .plant { left: -150px; bottom: -110px; height: 400px; opacity: .5; }
+      .social .plant { left: -50px; bottom: -60px; height: 340px; }
+
+      /* ---- wordmark and words ------------------------------------------------------------------------------------ */
+      .copy { position: absolute; }
+      .banner .copy { left: 150px; top: 44px; width: 1200px; }
+      .social .copy { left: 80px; top: 70px; width: 640px; }
+      /* The cursive brand: gradient fill + stacked extrusion, with room under the glyphs so the tail of the "y" is painted whole. */
+      .brand { display: inline-block; font-family: 'Pacifico', cursive; line-height: 1.2; letter-spacing: 0; padding: .14em .24em .64em; margin: -.14em -.24em -.64em;
+        background-image: linear-gradient(100deg, var(--title-from), var(--title-to)); -webkit-background-clip: text; background-clip: text; color: transparent;
+        filter: drop-shadow(0 1px 0 var(--title-depth)) drop-shadow(0 2px 0 var(--title-depth)) drop-shadow(0 8px 10px var(--shadow-key)); }
+      .banner .brand { font-size: 232px; }
+      .social .brand { font-size: 146px; }
+      .tag { font-family: 'Inter', system-ui, sans-serif; font-weight: 800; letter-spacing: -.035em; line-height: 1.1; color: var(--text);
+        filter: drop-shadow(0 1px 0 var(--shadow-ambient)) drop-shadow(0 2px 2px var(--shadow-deep)); }
+      .banner .tag { font-size: 64px; margin-top: 96px; }
+      .social .tag { font-size: 44px; margin-top: 70px; }
+      .lead { color: var(--text-muted); font-weight: 500; line-height: 1.45; }
+      .banner .lead { font-size: 36px; max-width: 1000px; margin-top: 12px; }
+      .social .lead { font-size: 27px; max-width: 580px; margin-top: 12px; }
+
+      .levels { display: flex; gap: 18px; margin-top: 34px; }
+      .social .levels { display: none; }
+      .level { display: inline-flex; align-items: center; gap: 12px; height: 62px; padding: 0 28px 0 20px; border-radius: 999px;
+        font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 29px; box-shadow: 0 1px 1px var(--shadow-ambient), 0 6px 18px var(--shadow-key); }
+      .level svg { width: 30px; height: 30px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+      .level.l1 { background: var(--danger); color: var(--danger-fg); }
+      .level.l2 { background: var(--warning); color: var(--warning-fg); }
+      .level.l3 { background: var(--success); color: var(--success-fg); }
+
+      /* ---- the mascot and the conversation ------------------------------------------------------------------------ */
+      .mascot { position: absolute; overflow: visible; }
+      .banner .mascot { left: 1405px; top: 150px; width: 560px; }
+      .social .mascot { left: 800px; top: 150px; width: 340px; }
+      .bubble { position: absolute; border-radius: 30px; padding: 22px 34px; font-size: 35px; line-height: 1.3; box-shadow: 0 1px 1px var(--shadow-ambient), 0 8px 22px var(--shadow-key); }
+      .bubble.user { background: var(--text); color: var(--surface); border-bottom-right-radius: 0; font-family: 'Poppins', sans-serif; font-weight: 600; }
+      .bubble.bot { background: var(--surface-raised); color: var(--text); border-bottom-left-radius: 0; font-weight: 600; box-shadow: 0 1px 1px var(--shadow-ambient), 0 8px 22px var(--shadow-key), inset 0 0 0 1px var(--border); }
+      .banner .bubble.user { left: 1840px; top: 96px; }
+      .banner .bubble.bot { left: 1830px; top: 540px; max-width: 440px; font-size: 33px; }
+      .social .bubble.user { left: 880px; top: 46px; font-size: 25px; padding: 15px 24px; }
+      .social .bubble.bot { display: none; }
+      .tail { position: absolute; bottom: 0; width: 22px; height: 30px; }
+      .user .tail { right: -21px; transform: scaleX(-1); fill: var(--text); }
+      .bot .tail { left: -21px; fill: var(--surface-raised); }
+      .dots { display: flex; gap: 10px; margin-top: 14px; }
+      .dots i { display: block; width: 16px; height: 16px; border-radius: 50%; background: var(--text-muted); opacity: .55; }
+      .dots i:nth-child(2) { opacity: .8; } .dots i:nth-child(3) { opacity: 1; }
+    </style>
+  </head>
+  <body>
+    <div id="stage" class="stage banner">
+      <div class="layer pool"></div>
+      <div class="blob"></div>
+
+      <svg class="waves" viewBox="0 0 2400 360" preserveAspectRatio="none" height="360" aria-hidden="true">
+        <path d="M0 150 C 380 70, 760 250, 1240 170 S 2020 60, 2400 150 V360 H0 Z" fill="var(--wave-a)" />
+        <path d="M0 230 C 420 160, 880 300, 1360 232 S 2030 150, 2400 236 V360 H0 Z" fill="var(--wave-b)" />
+      </svg>
+
+      <div class="paper p1"><svg viewBox="0 0 24 24"><path d="M3 12h4l2.5-6 4 12 2.5-6H21"/></svg><i></i><i></i><i></i><i></i></div>
+      <div class="paper p2"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><i></i><i></i><i></i><i></i></div>
+
+      <svg class="plant" viewBox="0 0 400 560" preserveAspectRatio="xMinYMax meet" aria-hidden="true">
+        <defs>
+          <linearGradient id="leaf-shade" x1="0" y1="0.5" x2="1" y2="0.5"><stop offset="0" stop-color="var(--leaf-a)"/><stop offset="1" stop-color="var(--leaf-b)"/></linearGradient>
+        </defs>
+        <g id="leaves"></g>
+      </svg>
+
+      <svg id="mascot" class="mascot" viewBox="0 0 120 130" aria-hidden="true">
+        <defs>
+          <radialGradient id="mb" cx="36%" cy="28%" r="78%"><stop offset="0" style="stop-color:var(--mascot-s0)"/><stop offset=".38" style="stop-color:var(--mascot-s1)"/><stop offset=".78" style="stop-color:var(--mascot-s2)"/><stop offset="1" style="stop-color:var(--mascot-s3)"/></radialGradient>
+          <radialGradient id="mh" cx="50%" cy="50%" r="50%"><stop offset=".7" stop-color="#fff" stop-opacity="1"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+          <radialGradient id="mr" cx="36%" cy="28%" r="100%"><stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset=".76" stop-color="#fff" stop-opacity="1"/></radialGradient>
+          <radialGradient id="mg" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+          <filter id="mblur" x="-30%" y="-200%" width="160%" height="500%"><feGaussianBlur stdDeviation="2.6"/></filter>
+        </defs>
+        <ellipse cx="60" cy="121" rx="38" ry="5.5" style="fill:var(--mascot-ground);opacity:var(--mascot-ground-opacity)" filter="url(#mblur)"/>
+        <circle cx="60" cy="60" r="70" fill="url(#mh)" style="opacity:var(--mascot-halo)"/>
+        <circle cx="60" cy="60" r="52" fill="url(#mb)"/>
+        <circle cx="60" cy="60" r="52" fill="url(#mr)" style="opacity:var(--mascot-rim)"/>
+        <ellipse cx="45" cy="33" rx="21" ry="12" transform="rotate(-28 45 33)" fill="url(#mg)" style="opacity:var(--mascot-gloss)"/>
+        <g transform="translate(47 56) rotate(-6)"><rect x="-5.5" y="-11" width="11" height="22" rx="5.5" fill="#0d0d0d"/></g>
+        <g transform="translate(73 56) rotate(-6)"><rect x="-5.5" y="-11" width="11" height="22" rx="5.5" fill="#0d0d0d"/></g>
+      </svg>
+
+      <div class="bubble user">Me duele el oído desde ayer…<svg class="tail" viewBox="0 0 10 14"><path d="M10 0V14H3C6.5 12.5 9 9.5 10 5Z"/></svg></div>
+      <div class="bubble bot">Eso se beneficia de una Consulta Prioritaria.<svg class="tail" viewBox="0 0 10 14"><path d="M10 0V14H3C6.5 12.5 9 9.5 10 5Z"/></svg></div>
+
+      <div class="copy">
+        <span class="brand">Waylo.ai</span>
+        <p class="tag">Navegador del paciente</p>
+        <p class="lead">Cuéntanos cómo te sientes y te decimos a qué nivel de atención acudir.</p>
+        <div class="levels">
+          <span class="level l1"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Urgencias</span>
+          <span class="level l2"><svg viewBox="0 0 24 24"><path d="M3 12h4l2.5-6 4 12 2.5-6H21"/></svg>Consulta Prioritaria</span>
+          <span class="level l3"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c.8-4 3.6-6 7-6s6.2 2 7 6"/></svg>Medicina General</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const q = new URLSearchParams(location.search);
+      const stage = document.getElementById('stage');
+      if (q.get('theme') === 'dark') stage.classList.add('dark');
+      if (q.get('variant') === 'social') { stage.classList.remove('banner'); stage.classList.add('social'); }
+      document.body.style.background = 'transparent';
+
+      // The web's out-of-focus plant (src/components/home/HeroDecor.tsx): a long blade drawn from its base, fanned along a stem.
+      const LEAF = 'M0 0 C 26 -40, 104 -44, 160 0 C 106 34, 30 36, 0 0 Z';
+      const MIDRIB = 'M6 0 Q 80 -4 154 0';
+      const specs = [[6,560,-62,1.55,.75],[60,560,-24,1.45,.7],[0,470,-78,1.25,.65],[20,552,-40,1.35],[32,520,-86,1.1,.9],[56,498,-14,1.25],[72,452,-60,1.15,.95],[96,420,-24,1.1],[112,382,-82,1,.9],[132,350,-36,1],[152,302,-64,.9,.95],[172,282,-16,.85]];
+      document.getElementById('leaves').innerHTML = specs.map(([x, y, a, s, o = 1]) =>
+        `<g transform="translate(${x} ${y}) rotate(${a}) scale(${s})" opacity="${o}"><path d="${LEAF}" fill="url(#leaf-shade)"/><path d="${MIDRIB}" fill="none" stroke="var(--leaf-b)" stroke-opacity=".55" stroke-width="1.6" stroke-linecap="round"/></g>`).join('');
+    </script>
+  </body>
+</html>

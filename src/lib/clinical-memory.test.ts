@@ -36,7 +36,7 @@ describe("formato de memoria clínica", () => {
   });
 
   it("serializes structured detail values without leaking newlines", () => {
-    const text = formatClinicalMemory(record({ details: { notas: "línea 1\n\n línea 2", activo: true } }));
+    const text = formatClinicalMemory([record({ details: { notas: "línea 1\n\n línea 2", activo: true } })]);
 
     expect(text).toContain("notas: línea 1 línea 2");
     expect(text).toContain("activo: true");

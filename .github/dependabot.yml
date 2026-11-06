@@ -1,0 +1,36 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: America/Bogota
+    open-pull-requests-limit: 5
+    # Minor and patch updates arrive together in one pull request; majors come alone so they can be reviewed.
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+    commit-message:
+      prefix: chore
+      include: scope
+    labels: [dependencies]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: ci
+      include: scope
+    labels: [dependencies]
+
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: build
+      include: scope
+    labels: [dependencies]

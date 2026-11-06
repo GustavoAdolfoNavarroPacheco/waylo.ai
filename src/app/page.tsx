@@ -29,7 +29,9 @@ export default async function HomePage() {
   const chatHref = "/chat";
 
   return (
-    <div id="home-top" className="bg-surface text-text">
+    // The blurred shapes behind the cards reach past the screen's edge. Clipped (not hidden, so sticky titles keep working),
+    // because on a phone anything wider than the screen makes the browser widen the page and zoom it out.
+    <div id="home-top" className="overflow-x-clip bg-surface text-text">
       <link rel="canonical" href={`${SITE_URL}/`} />
       <script
         type="application/ld+json"
