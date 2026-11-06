@@ -3,13 +3,12 @@ import {
   DEFAULT_VOICE,
   VOICE_IDS,
   VOICE_COOKIE,
-  isLanguageChoice,
   isVoice,
   languageOf,
   readPreferences,
   voiceIdFor,
 } from "@/lib/preferences";
-import { LANGUAGE_CHOICES, matchLocale } from "@/i18n/locales";
+import { LANGUAGE_CHOICES, isLanguageChoice, matchLocale } from "@/i18n/locales";
 
 describe("preferencias de idioma y voz", () => {
   it("accepts only supported language and voice choices", () => {
