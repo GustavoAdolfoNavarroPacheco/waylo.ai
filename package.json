@@ -50,7 +50,7 @@
     "eslint-config-next": "15.5.28",
     "jszip": "^3.10.2",
     "tailwindcss": "^4",
-    "typescript": "^5",
+    "typescript": "^7",
     "vitest": "^3.2.7"
   }
 }
