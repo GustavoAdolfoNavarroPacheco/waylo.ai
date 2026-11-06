@@ -30,7 +30,7 @@ const frontendEnv = parseEnv(readFileSync(join(frontendDir, '.env.local'), 'utf8
 const retoKey = frontendEnv.RETO_KEY;
 const retoBase = (frontendEnv.RETO_BASE_URL || 'https://api.reto.pltk.mx/v1').replace(/\/+$/, '');
 const model = frontendEnv.RETO_MODEL || 'grok-4.20-0309-non-reasoning';
-if (!retoKey) throw new Error('Falta RETO_KEY en el .env.local del frontend.');
+if (!retoKey) throw new Error('RETO_KEY is missing from the frontend .env.local.');
 
 // --- the observers ----------------------------------------------------------------------------------------------
 let current = null; // the run being recorded
@@ -145,11 +145,11 @@ const link = await prisma.externalIpsLink.findFirst({
   orderBy: { linkedAt: 'asc' },
   select: { externalSubject: true, ipsId: true },
 });
-if (!link) throw new Error('No hay un vínculo IPS activo para ejecutar el agente.');
+if (!link) throw new Error('There is no active IPS link to run the agent for.');
 // The institution's address lives in the database, not in the environment: that is the host to observe.
 const ips = await prisma.ips.findUnique({ where: { id: link.ipsId }, select: { baseUrl: true } });
 await prisma.$disconnect();
-if (!ips) throw new Error('El vínculo apunta a una IPS que no existe.');
+if (!ips) throw new Error('The link points to an IPS that does not exist.');
 const externalSubject = link.externalSubject;
 console.log(`IPS observada: ${new URL(ips.baseUrl).host}`);
 
@@ -183,10 +183,12 @@ try {
   for (let i = 0; i < 60; i += 1) {
     const up = await fetch(`${api}/health`).then((r) => r.status < 500).catch(() => false);
     if (up) break;
-    if (i === 59) throw new Error(`El backend no arrancó. Últimas líneas: ${backendTail.replace(/postgres(ql)?:\/\/\S+/g, '[db]')}`);
+    if (i === 59) throw new Error(`The backend did not start. Last lines: ${backendTail.replace(/postgres(ql)?:\/\/\S+/g, '[db]')}`);
     await new Promise((r) => setTimeout(r, 500));
   }
 
+  // The agent speaks Spanish, so its system prompt and the prompts below are in Spanish on purpose: they are what the
+  // product's users actually type, and what was recorded in runs.jsonl.
   const system =
     'Eres Waylo, un navegador del sistema de salud: orientas a la persona sobre a qué nivel de atención acudir y consultas la IPS con tus herramientas reales. ' +
     'No diagnosticas, no recetas y no inventas datos: si una herramienta falla, lo dices. Solo lectura: no apartes, canceles ni muevas citas. ' +
@@ -272,18 +274,18 @@ try {
   const required = ['list_appointment_catalog', 'find_earliest_availability', 'list_my_appointments'];
   const seen = new Set(final.flatMap((r) => r.tool_names));
   const problems = [
-    final.some((r) => !r.audit_found) ? `${final.filter((r) => !r.audit_found).length} sin registro de auditoría` : null,
-    final.some((r) => r.agent_status !== 'succeeded') ? `${final.filter((r) => r.agent_status !== 'succeeded').length} sin estado exitoso` : null,
-    final.some((r) => r.tool_names.length === 0) ? `${final.filter((r) => r.tool_names.length === 0).length} sin herramientas` : null,
-    required.filter((t) => !seen.has(t)).length ? `faltan: ${required.filter((t) => !seen.has(t)).join(', ')}` : null,
-    final.some((r) => r.injected_failure && !r.injected_failure.consumed) ? 'un fallo inyectado no llegó a usarse' : null,
+    final.some((r) => !r.audit_found) ? `${final.filter((r) => !r.audit_found).length} without an audit record` : null,
+    final.some((r) => r.agent_status !== 'succeeded') ? `${final.filter((r) => r.agent_status !== 'succeeded').length} without a successful status` : null,
+    final.some((r) => r.tool_names.length === 0) ? `${final.filter((r) => r.tool_names.length === 0).length} without tools` : null,
+    required.filter((t) => !seen.has(t)).length ? `missing: ${required.filter((t) => !seen.has(t)).join(', ')}` : null,
+    final.some((r) => r.injected_failure && !r.injected_failure.consumed) ? 'an injected failure was never used' : null,
   ].filter(Boolean);
 
   mkdirSync(join(here), { recursive: true });
   writeFileSync(join(here, '..', 'runs.jsonl'), final.map((r) => JSON.stringify(r)).join('\n') + '\n');
   // Only the replies that carry no personal data are kept (catalog and open slots); the rest are replaced by a note.
   const safe = new Set(['catalog-1', 'catalog-2', 'earliest-1', 'earliest-2', 'earliest-3']);
-  const redacted = replies.map((x) => (safe.has(x.scenario) ? x : { run: x.run, scenario: x.scenario, text: '[redactado: la respuesta traía datos del paciente de prueba]' }));
+  const redacted = replies.map((x) => (safe.has(x.scenario) ? x : { run: x.run, scenario: x.scenario, text: '[redacted: the reply carried test-patient data]' }));
   writeFileSync(join(here, '..', 'replies.redacted.json'), JSON.stringify(redacted, null, 2));
   writeFileSync(
     join(here, '..', 'summary.json'),
@@ -301,7 +303,7 @@ try {
       2,
     ),
   );
-  console.log(problems.length ? `INCOMPLETA: ${problems.join('; ')}` : 'EVIDENCIA COMPLETA');
+  console.log(problems.length ? `INCOMPLETE: ${problems.join('; ')}` : 'EVIDENCE COMPLETE');
   if (problems.length) process.exitCode = 1;
 } finally {
   await shutdown();

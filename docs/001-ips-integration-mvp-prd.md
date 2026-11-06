@@ -1,130 +1,131 @@
-# PRD: Integración Waylo–Confianza IPS (MVP)
+# PRD: Waylo–Confianza IPS integration (MVP)
 
-**Estado:** aprobado para implementación
-**Fecha:** 2026-10-26
-**Repositorio:** `waylo.ai`
+**Status:** approved for implementation
+**Date:** 2026-10-26
+**Repository:** `waylo.ai`
 
-## Problema y objetivo
+> Terms: **EPS** is the patient's health insurer, **IPS** is the healthcare provider (clinic or hospital), and
+> **cédula** is the Colombian national ID number.
 
-Waylo ya tiene una experiencia ciudadana funcional: autenticación, triage, red flags,
-voz, adjuntos, perfil, preferencias y un panel para guardar EPS, cédula, autorización
-y código temporal. Sin embargo, esos datos todavía no activan una conexión real con
-la IPS. El frontend debe conservar esas capacidades y sumar un puente server-side hacia
-`waylo.ai-backend`, sin exponer secretos ni tokens al navegador.
+## Problem and goal
 
-El MVP permitirá que un paciente:
+Waylo already has a working citizen experience: authentication, triage, red flags, voice, attachments, profile,
+preferences and a panel to store the EPS, cédula, authorization and a temporary code. Those data do not yet activate a
+real connection with the IPS, though. The frontend must keep those capabilities and add a server-side bridge to
+`waylo.ai-backend`, without exposing secrets or tokens to the browser.
 
-1. Autorice a Waylo y seleccione Confianza.
-2. Introduzca su cédula y el código temporal emitido por Confianza.
-3. Vincule su cuenta de Waylo con su paciente en Confianza.
-4. Consulte sus citas desde el agente cuando lo solicite.
+The MVP lets a patient:
 
-## Alcance
+1. Authorize Waylo and select Confianza.
+2. Enter their cédula and the temporary code issued by Confianza.
+3. Link their Waylo account to their patient record in Confianza.
+4. Ask the agent about their appointments.
 
-### Incluido
+## Scope
 
-- Route Handlers de Next.js como BFF para la integración IPS.
-- Estado de vínculo en la configuración de Waylo.
-- Flujo explícito de conexión desde el panel EPS.
-- Consulta server-side de perfil IPS y citas.
-- Contexto de citas para el agente cuando el paciente pregunta por ellas.
-- Manejo de IPS no disponible, vínculo inexistente, código inválido y token vencido.
-- Pruebas unitarias de rutas y cliente de integración.
+### Included
 
-### Fuera del alcance
+- Next.js Route Handlers as a BFF for the IPS integration.
+- Link status in Waylo's settings.
+- An explicit connection flow from the EPS panel.
+- Server-side lookup of the IPS profile and appointments.
+- Appointment context for the agent when the patient asks about them.
+- Handling of an unavailable IPS, a missing link, an invalid code and an expired token.
+- Unit tests for the routes and the integration client.
 
-- Crear, cancelar o reprogramar citas.
-- Consultar disponibilidad.
-- Historia clínica, documentos o autorizaciones clínicas.
-- Migrar la autenticación actual de Waylo.
-- Mover el triage, la voz, los adjuntos o el almacenamiento de conversaciones al backend.
-- Comunicación directa del navegador con Confianza o con `waylo.ai-backend`.
+### Out of scope
 
-## Actores y responsabilidades
+- Creating, cancelling or rescheduling appointments.
+- Checking availability.
+- Clinical history, documents or clinical authorizations.
+- Migrating Waylo's current authentication.
+- Moving triage, voice, attachments or conversation storage to the backend.
+- Direct communication from the browser with Confianza or with `waylo.ai-backend`.
 
-| Actor | Responsabilidad |
+## Actors and responsibilities
+
+| Actor | Responsibility |
 |---|---|
-| Paciente | Otorga autorización, introduce cédula y código temporal. |
-| `waylo.ai` | Mantiene la UX, la sesión del paciente y las rutas BFF. |
-| `waylo.ai-backend` | Protege el vínculo y adapta el contrato canónico a Confianza. |
-| Confianza IPS | Valida el código de un solo uso y entrega el token limitado. |
-| Agente Waylo | Responde con datos IPS únicamente cuando existe vínculo activo. |
+| Patient | Grants authorization, enters the cédula and the temporary code. |
+| `waylo.ai` | Owns the UX, the patient session and the BFF routes. |
+| `waylo.ai-backend` | Protects the link and adapts the canonical contract to Confianza. |
+| Confianza IPS | Validates the one-time code and issues the limited token. |
+| Waylo agent | Answers with IPS data only when an active link exists. |
 
-## Flujo aprobado
+## Approved flow
 
 ```text
 EpsPanel
   -> POST /api/ips/link
-  -> Next.js valida la sesión Waylo
-  -> POST /internal/ips/link al backend adaptador
-  -> POST /api/v1/integrations/agent/token en Confianza
-  -> backend cifra y guarda el token IPS
-  -> GET /api/ips/appointments cuando el agente detecta una pregunta sobre citas
-  -> backend descifra el token y consulta Confianza
-  -> Waylo responde sin mostrar tokens ni credenciales
+  -> Next.js validates the Waylo session
+  -> POST /internal/ips/link to the adapter backend
+  -> POST /api/v1/integrations/agent/token on Confianza
+  -> the backend encrypts and stores the IPS token
+  -> GET /api/ips/appointments when the agent detects a question about appointments
+  -> the backend decrypts the token and queries Confianza
+  -> Waylo answers without showing tokens or credentials
 ```
 
-## Contrato del frontend
+## Frontend contract
 
-Las rutas BFF son internas a `waylo.ai`:
+The BFF routes are internal to `waylo.ai`:
 
-- `GET /api/ips/link`: devuelve estado del vínculo.
-- `POST /api/ips/link`: recibe `document_type`, `document_number`, `eps` y `activation_code`.
-- `DELETE /api/ips/link`: revoca el vínculo local de Waylo.
-- `GET /api/ips/patient`: devuelve el perfil IPS normalizado.
-- `GET /api/ips/appointments`: devuelve citas normalizadas.
+- `GET /api/ips/link`: returns the link status.
+- `POST /api/ips/link`: receives `document_type`, `document_number`, `eps` and `activation_code`.
+- `DELETE /api/ips/link`: revokes Waylo's local link.
+- `GET /api/ips/patient`: returns the normalized IPS profile.
+- `GET /api/ips/appointments`: returns normalized appointments.
 
-Las rutas requieren la sesión existente de Waylo. Ningún secreto de integración se
-envía desde componentes cliente.
+The routes require the existing Waylo session. No integration secret is sent from client components.
 
-## Reglas de seguridad
+## Security rules
 
-- `WAYLO_BACKEND_KEY` solo existe en el entorno server-side de Next.js.
-- `CONFIANZA_AGENT_KEY` solo existe en `waylo.ai-backend`.
-- El token entregado por Confianza nunca llega al navegador ni a la respuesta del BFF.
-- El código temporal se envía una sola vez al backend y no se muestra de vuelta.
-- El paciente no puede modificar su EPS institucional desde Waylo.
-- Si la IPS no responde, el agente no inventa citas y conserva disponible el triage local.
-- El agente no ejecuta operaciones de escritura en este MVP.
+- `WAYLO_BACKEND_KEY` exists only in Next.js's server-side environment.
+- `CONFIANZA_AGENT_KEY` exists only in `waylo.ai-backend`.
+- The token issued by Confianza never reaches the browser or the BFF response.
+- The temporary code is sent to the backend once and is never shown back.
+- The patient cannot change their institutional EPS from Waylo.
+- If the IPS does not answer, the agent does not invent appointments and local triage stays available.
+- The agent performs no write operations in this MVP.
 
-## Datos e integración
+## Data and integration
 
-La identidad usada por el BFF es el `session.id` del frontend como `external_subject`.
-El backend adaptador mantiene su propio registro de conexión y no necesita duplicar la
-autenticación de Waylo. La sesión de Waylo sigue siendo la autoridad para el navegador.
+The identity the BFF uses is the frontend's `session.id`, sent as `external_subject`. The adapter backend keeps its own
+connection record and does not need to duplicate Waylo's authentication. Waylo's session remains the authority for the
+browser.
 
-## Estados visibles
+## Visible states
 
-- `none`: nunca se ha conectado.
-- `active`: vínculo activo y token vigente.
-- `expired`: se debe repetir la activación.
-- `deactivated`: Confianza rechazó o desactivó el vínculo.
-- `unavailable`: el backend o la IPS no están disponibles.
+- `none`: never connected.
+- `active`: active link with a valid token.
+- `expired`: the activation must be repeated.
+- `deactivated`: Confianza rejected or deactivated the link.
+- `unavailable`: the backend or the IPS is not available.
 
-El estado local `acceso` de EPS no se tratará como equivalente al vínculo IPS: uno indica
-que existen datos locales válidos y el otro confirma una activación real.
+The local EPS `acceso` state is not treated as equivalent to the IPS link: one says valid local data exist, the other
+confirms a real activation.
 
-## Validaciones de aceptación
+## Acceptance checks
 
-- Un usuario no autenticado recibe `401` y no se intenta llamar al backend adaptador.
-- Un código inválido se muestra como error de conexión, sin borrar arbitrariamente el perfil.
-- Una conexión exitosa muestra `active` en configuración.
-- Una pregunta explícita por citas consulta Confianza solo con vínculo activo.
-- La respuesta del agente incluye únicamente citas devueltas por la IPS.
-- La caída de Confianza produce un mensaje controlado y no rompe el triage.
-- El build y las pruebas del frontend pasan sin modificar las funcionalidades existentes.
+- An unauthenticated user gets `401` and the adapter backend is never called.
+- An invalid code is shown as a connection error, without arbitrarily deleting the profile.
+- A successful connection shows `active` in settings.
+- An explicit question about appointments queries Confianza only with an active link.
+- The agent's answer includes only appointments returned by the IPS.
+- A Confianza outage produces a controlled message and does not break triage.
+- The frontend build and tests pass without changing existing features.
 
-## Riesgos y decisiones
+## Risks and decisions
 
-- La sesión actual del frontend y la autenticación histórica del backend son sistemas
-  distintos. Por eso el MVP usa BFF + `external_subject`, en lugar de compartir cookies.
-- Confianza todavía no devuelve sexo, sede primaria, tipo de cita ni nombre de sede en
-  el contrato mínimo. El MVP no mostrará esos campos.
-- La red y las bases de datos de prueba deben estar aisladas antes de ejecutar una
-  validación real; nunca se usará el `.env` productivo para seeds o pruebas destructivas.
+- The frontend's current session and the backend's historical authentication are different systems. That is why the MVP
+  uses a BFF plus `external_subject` instead of sharing cookies.
+- Confianza does not yet return sex, primary site, appointment type or site name in the minimum contract. The MVP does
+  not show those fields.
+- Networks and test databases must be isolated before running a real validation; the production `.env` is never used for
+  seeds or destructive tests.
 
-## Evidencia y documentación relacionada
+## Evidence and related documentation
 
-- Contrato interno del adaptador: `waylo.ai-backend/docs/001-ips-integration-mvp-prd.md`.
-- Contrato de Confianza: `ConfianzaIPS/confianza-ips-backend/docs/006-waylo-agent-integration-mvp.md`.
-- Flujo institucional de emisión: `ConfianzaIPS/confianza-ips-frontend/docs/006-waylo-agent-integration-mvp.md`.
+- The adapter's internal contract: `waylo.ai-backend/docs/001-ips-integration-mvp-prd.md`.
+- Confianza's contract: `ConfianzaIPS/confianza-ips-backend/docs/006-waylo-agent-integration-mvp.md`.
+- The institutional issuing flow: `ConfianzaIPS/confianza-ips-frontend/docs/006-waylo-agent-integration-mvp.md`.

@@ -93,4 +93,4 @@ await sql`
   )
 `;
 await sql`create index if not exists memoria_clinica_persona_idx on memoria_clinica (persona_id, estado, actualizado_en desc)`;
-console.log("Memoria clínica estructurada lista.");
+console.log("Structured clinical memory is ready.");

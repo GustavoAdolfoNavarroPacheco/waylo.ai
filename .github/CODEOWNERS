@@ -1,13 +1,13 @@
-# Cada pull request pide revisión a quien corresponde. Última coincidencia gana.
+# Every pull request asks for review from whoever owns the code. The last matching pattern wins.
 *                          @GustavoAdolfoNavarroPacheco
 
-# Seguridad clínica: qué hace y qué nunca hace Waylo.
+# Clinical safety: what Waylo does and what it never does.
 /AGENTS.md                 @GustavoAdolfoNavarroPacheco
 /src/lib/red-flags.ts      @GustavoAdolfoNavarroPacheco
 /src/lib/red-flags.test.ts @GustavoAdolfoNavarroPacheco
 /src/lib/system-prompt.ts  @GustavoAdolfoNavarroPacheco
 
-# Automatización y políticas del repositorio.
+# Automation and repository policies.
 /.github/                  @GustavoAdolfoNavarroPacheco
 /SECURITY.md               @GustavoAdolfoNavarroPacheco
 /LICENSE                   @GustavoAdolfoNavarroPacheco

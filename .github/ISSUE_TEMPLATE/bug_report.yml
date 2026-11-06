@@ -1,72 +1,72 @@
-name: Reportar un error
-description: Algo no funciona como debería.
-title: "[Error] "
+name: Report a bug
+description: Something does not work as it should.
+title: "[Bug] "
 labels: ["bug"]
 body:
   - type: markdown
     attributes:
       value: |
-        Gracias por ayudarnos a mejorar Waylo.
-        **Si es una vulnerabilidad de seguridad, no uses este formulario:** sigue la [política de seguridad](https://github.com/GustavoAdolfoNavarroPacheco/waylo.ai/security/policy).
+        Thanks for helping us improve Waylo.
+        **If this is a security vulnerability, do not use this form:** follow the [security policy](https://github.com/GustavoAdolfoNavarroPacheco/waylo.ai/security/policy).
   - type: textarea
-    id: que-pasa
+    id: what-happens
     attributes:
-      label: ¿Qué está pasando?
-      description: Describe el error con tus palabras.
-      placeholder: Al enviar un mensaje con un adjunto, el chat se queda cargando.
+      label: What is happening?
+      description: Describe the bug in your own words.
+      placeholder: When I send a message with an attachment, the chat keeps loading.
     validations:
       required: true
   - type: textarea
-    id: pasos
+    id: steps
     attributes:
-      label: Pasos para reproducirlo
+      label: Steps to reproduce
       value: |
-        1. Ir a '...'
-        2. Pulsar '...'
-        3. Ver el error
+        1. Go to '...'
+        2. Click '...'
+        3. See the error
     validations:
       required: true
   - type: textarea
-    id: esperado
+    id: expected
     attributes:
-      label: ¿Qué esperabas que pasara?
+      label: What did you expect to happen?
     validations:
       required: true
   - type: dropdown
     id: area
     attributes:
-      label: ¿En qué parte ocurre?
+      label: Where does it happen?
       options:
-        - Portada
-        - Chat y orientación
-        - Voz (Waylo Live)
-        - Adjuntos
-        - Cuenta, registro o ingreso
-        - Configuración (EPS, memoria, preferencias)
-        - Integración con la IPS
-        - Instalación o despliegue
-        - Otra
+        - Home page
+        - Chat and guidance
+        - Voice (Waylo Live)
+        - Attachments
+        - Account, sign-up or sign-in
+        - Settings (EPS, memory, preferences)
+        - IPS integration
+        - Installation or deployment
+        - Other
     validations:
       required: true
   - type: input
-    id: entorno
+    id: environment
     attributes:
-      label: Dispositivo y navegador
+      label: Device and browser
       placeholder: Android 14, Chrome 130 / Windows 11, Edge 130
   - type: dropdown
-    id: idioma
+    id: language
     attributes:
-      label: Idioma de la interfaz
-      options: [Español, English, Português]
+      label: Interface language
+      options: [Spanish, English, Portuguese]
   - type: textarea
-    id: capturas
+    id: screenshots
     attributes:
-      label: Capturas o registros
-      description: Arrastra aquí imágenes o pega el error de la consola.
+      label: Screenshots or logs
+      description: Drag images here or paste the console error.
   - type: checkboxes
-    id: privacidad
+    id: privacy
     attributes:
-      label: Privacidad
+      label: Privacy
       options:
-        - label: Confirmo que no incluyo datos reales de pacientes, documentos de identidad, claves ni tokens.
+        - label: I confirm I am not including real patient data, identity documents, keys or tokens.
           required: true

@@ -1,32 +1,32 @@
-## ¿Qué cambia y por qué?
+## What changes and why?
 
-<!-- Una o dos frases. Enlaza la incidencia si existe: Closes #123 -->
+<!-- One or two sentences. Link the issue if there is one: Closes #123 -->
 
-## Tipo de cambio
+## Type of change
 
-- [ ] `feat`: funcionalidad nueva
-- [ ] `fix`: corrección de un error
-- [ ] `docs`: documentación
+- [ ] `feat`: new feature
+- [ ] `fix`: bug fix
+- [ ] `docs`: documentation
 - [ ] `refactor` / `perf` / `test`
 - [ ] `ci` / `build` / `chore`
 
-## Cómo se probó
+## How it was tested
 
-<!-- Comandos ejecutados, casos probados, dispositivos o navegadores. -->
+<!-- Commands run, cases tried, devices or browsers. -->
 
-## Capturas (si cambia lo que se ve)
+## Screenshots (if what users see changes)
 
-| Antes | Después |
-| ----- | ------- |
-|       |         |
+| Before | After |
+| ------ | ----- |
+|        |       |
 
-## Lista de comprobación
+## Checklist
 
-- [ ] `npm run lint`, `npm test` y `npm run build` pasan.
-- [ ] Los mensajes de commit siguen la [convención](../CONTRIBUTING.md#convención-de-commits).
-- [ ] Añadí o actualicé pruebas.
-- [ ] Actualicé la documentación o el README si cambia el comportamiento.
-- [ ] Si toqué textos, los tres idiomas (`es`, `en`, `pt`) tienen la misma forma.
-- [ ] Mantengo la accesibilidad (contraste, foco visible, movimiento reducido).
-- [ ] No incluyo claves, tokens, `.env` ni datos reales de personas.
-- [ ] Waylo sigue sin diagnosticar, recetar ni dar dosis. Si cambié las señales de alarma o el *prompt*, lo indiqué para revisión clínica.
+- [ ] `npm run lint`, `npm test` and `npm run build` pass.
+- [ ] Commit messages follow the [convention](../CONTRIBUTING.md#commit-convention).
+- [ ] I added or updated tests.
+- [ ] I updated the documentation or the README if behavior changes.
+- [ ] If I touched copy, the three languages (`es`, `en`, `pt`) keep the same shape.
+- [ ] I keep accessibility (contrast, visible focus, reduced motion).
+- [ ] I include no keys, tokens, `.env` files or real personal data.
+- [ ] Waylo still does not diagnose, prescribe or give doses. If I changed the warning signs or the prompt, I flagged it for clinical review.

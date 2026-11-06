@@ -1,41 +1,32 @@
-# Auditoría de pruebas del frontend ciudadano
+# Citizen frontend testing audit
 
-Fecha de corte: 2026-10-29
+Cut-off date: 2026-10-29
 
-## Alcance
+## Scope
 
-Se revisaron las rutas App Router, los clientes server-side, la sesión, las
-preferencias, la memoria clínica y los límites de lectura de la IPS. La
-auditoría se concentró en comportamiento determinista y no persiste ni expone
-credenciales reales.
+The App Router routes, the server-side clients, the session, the preferences, the clinical memory and the IPS read limits
+were reviewed. The audit focused on deterministic behavior and does not persist or expose real credentials.
 
-## Cobertura añadida
+## Coverage added
 
-- Preferencias: validación de idioma/voz, fallback de cookies, etiquetas de
-  idioma y selección de voz.
-- Seguridad: hash scrypt, salts distintos y rechazo de hashes corruptos.
-- Memoria clínica: solo registros activos, límites de serialización y limpieza
-  de contenido estructurado.
-- Lecturas IPS: sesión obligatoria, propagación del subject server-side,
-  `Cache-Control: no-store`, errores tipados y reporte seguro de indisponibilidad.
-- Sesiones: cierre de otros dispositivos, protección de la sesión actual,
-  validación de UUID, not-found y degradación ante errores de persistencia.
+- Preferences: language and voice validation, cookie fallback, language labels and voice selection.
+- Security: scrypt hashing, distinct salts and rejection of corrupted hashes.
+- Clinical memory: only active records, serialization limits and cleaning of structured content.
+- IPS reads: mandatory session, server-side subject propagation, `Cache-Control: no-store`, typed errors and safe
+  unavailability reporting.
+- Sessions: closing other devices, protection of the current session, UUID validation, not-found handling and
+  degradation on persistence errors.
 
-## Evidencia
+## Evidence
 
-- `git diff --check`: correcto.
-- Los cinco archivos TypeScript nuevos fueron parseados con el compilador
-  TypeScript disponible en el workspace: sin errores sintácticos.
-- La suite no pudo ejecutarse localmente porque este checkout no tiene
-  `node_modules/.bin/vitest` ni `next`.
-- La instalación temporal sin modificar `package-lock.json` quedó bloqueada por
-  la red restringida del entorno. El lockfile ya está documentado como no apto
-  para `npm ci` hasta regenerar sus entradas opcionales de `@emnapi`.
+- `git diff --check`: passed.
+- The five new TypeScript files were parsed with the TypeScript compiler available in the workspace: no syntax errors.
+- The suite could not be run locally because that checkout had neither `node_modules/.bin/vitest` nor `next`.
+- A temporary install that left `package-lock.json` unmodified was blocked by the environment's restricted network. The
+  lockfile is already documented as unfit for `npm ci` until its optional `@emnapi` entries are regenerated.
 
-## Riesgos y pendientes
+## Risks and pending work
 
-La evidencia actual no incluye cobertura porcentual ni una prueba de navegador
-real. La siguiente mejora debe regenerar y validar el lockfile, instalar
-`@vitest/coverage-v8` de forma reproducible y publicar umbrales de cobertura
-por paquete. La verificación de producción debe comprobar por separado la
-sesión, el backend Waylo y la IPS conectada.
+The current evidence includes no coverage percentage and no real-browser test. The next improvement should regenerate and
+validate the lockfile, install `@vitest/coverage-v8` reproducibly and publish coverage thresholds per package. Production
+verification must check the session, the Waylo backend and the connected IPS separately.

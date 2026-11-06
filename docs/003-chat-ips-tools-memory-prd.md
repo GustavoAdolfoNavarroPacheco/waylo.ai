@@ -1,107 +1,100 @@
-# PRD: chat conectado a IPS y memoria paciente-scoped
+# PRD: chat connected to the IPS and patient-scoped memory
 
-**Estado:** aprobado para implementación
-**Fecha:** 2026-10-29
-**Repositorio propietario:** `waylo.ai`
-**Repositorio compañero:** `waylo.ai-backend`
+**Status:** approved for implementation
+**Date:** 2026-10-29
+**Owning repository:** `waylo.ai`
+**Companion repository:** `waylo.ai-backend`
 
-## Problema y objetivo
+## Problem and goal
 
-La configuración de Waylo puede crear un vínculo activo con Confianza IPS, pero el
-chat principal continúa llamando directamente a Reto desde `runTriage`. Por eso el
-agente no recibe el sujeto externo de la sesión, no activa las herramientas IPS y
-puede afirmar que no tiene capacidad para gestionar citas.
+Waylo's settings can create an active link with Confianza IPS, but the main chat still calls Reto directly from
+`runTriage`. As a result the agent does not receive the session's external subject, does not enable the IPS tools, and can
+claim it has no ability to manage appointments.
 
-Además, las conversaciones actuales viven únicamente en `localStorage`, con un
-límite de 15 conversaciones y una retención de siete días. Ese historial no sirve
-como memoria entre conversaciones, dispositivos o sesiones.
+In addition, today's conversations live only in `localStorage`, with a limit of 15 conversations and a seven-day
+retention. That history is no use as memory across conversations, devices or sessions.
 
-El objetivo es mantener la UX y el triage actuales, pero conectar el chat con el
-relay interno de `waylo.ai-backend`, habilitar las operaciones patient-scoped de la
-IPS y añadir memoria clínica estructurada, explícitamente confirmada por el
-paciente.
+The goal is to keep the current UX and triage, but connect the chat to the internal relay of `waylo.ai-backend`, enable the
+IPS's patient-scoped operations, and add structured clinical memory that the patient explicitly confirms.
 
-## Alcance
+## Scope
 
-### Incluido
+### Included
 
-- Mantener `POST /api/triage` como entrada del navegador.
-- Ejecutar red flags antes de cualquier llamada IPS o tool.
-- Enviar desde el servidor el `external_subject` basado en la sesión Waylo.
-- Enviar y recibir el token temporal de confirmación de citas sin persistirlo.
-- Mostrar respuestas del backend conservando `TriageResponse` y la tarjeta actual.
-- Comunicar al modelo si existe vínculo IPS activo, sin exponer tokens.
-- Recuperar memoria confirmada relevante para cada consulta.
-- Proponer memoria estructurada solo cuando el paciente lo solicite.
-- Confirmar, listar, editar y eliminar memoria desde rutas server-side.
-- Borrar la memoria por cascada al eliminar la cuenta.
-- Actualizar documentación, pruebas y variables server-only.
+- Keep `POST /api/triage` as the browser's entry point.
+- Run red flags before any IPS call or tool.
+- Send the `external_subject` from the server, based on the Waylo session.
+- Send and receive the temporary appointment-confirmation token without persisting it.
+- Show backend answers while keeping `TriageResponse` and the current card.
+- Tell the model whether an active IPS link exists, without exposing tokens.
+- Retrieve the confirmed memory relevant to each query.
+- Propose structured memory only when the patient asks for it.
+- Confirm, list, edit and delete memory through server-side routes.
+- Delete memory by cascade when the account is deleted.
+- Update documentation, tests and server-only variables.
 
-### Fuera del alcance
+### Out of scope
 
-- Migrar autenticación, sesiones, límites o conversaciones completas al backend.
-- Guardar transcripciones, archivos, respuestas completas del modelo o diagnósticos.
-- Modificar rutas, modelos o permisos de `ConfianzaIPS` sin evidencia contractual.
-- Exponer rutas administrativas, médicas o de personal como herramientas del paciente.
-- Cambiar la UX de voz, títulos o streaming salvo los ajustes necesarios para el
-  nuevo contrato.
+- Migrating authentication, sessions, limits or full conversations to the backend.
+- Storing transcripts, files, full model answers or diagnoses.
+- Changing `ConfianzaIPS` routes, models or permissions without contractual evidence.
+- Exposing administrative, medical or staff routes as patient tools.
+- Changing the voice UX, titles or streaming, other than the adjustments the new contract needs.
 
-## Actores y responsabilidades
+## Actors and responsibilities
 
-| Actor | Responsabilidad |
+| Actor | Responsibility |
 |---|---|
-| Paciente | Vincula la IPS, confirma operaciones de escritura y confirma memorias. |
-| `waylo.ai` | Sesión, límites, red flags, UX, BFF, memoria propia y presentación. |
-| `waylo.ai-backend` | Relay LLM, tools, tokens IPS cifrados y normalización del contrato. |
-| Confianza IPS | Fuente institucional de paciente, historia y citas. |
+| Patient | Links the IPS, confirms write operations and confirms memories. |
+| `waylo.ai` | Session, limits, red flags, UX, BFF, its own memory and presentation. |
+| `waylo.ai-backend` | LLM relay, tools, encrypted IPS tokens and normalization of the contract. |
+| Confianza IPS | Institutional source of patient, history and appointments. |
 
-## Flujo aprobado
+## Approved flow
 
 ```text
 ChatApp
   -> POST /api/triage
-  -> red flags y límites
-  -> memoria Waylo confirmada + estado IPS
+  -> red flags and limits
+  -> confirmed Waylo memory + IPS status
   -> POST /internal/chat/completion
        external_subject = session.id
-       pending_appointment_token opcional
-  -> Reto con tools patient-scoped
-  -> adaptador IPS -> Confianza
-  -> texto final + pending_appointment opcional
-  -> respuesta TriageResponse al navegador
+       optional pending_appointment_token
+  -> Reto with patient-scoped tools
+  -> IPS adapter -> Confianza
+  -> final text + optional pending_appointment
+  -> TriageResponse to the browser
 ```
 
-## Memoria
+## Memory
 
-La memoria se asociará a `persona_id`, nunca a `session_id`, al navegador o a una
-conversación. Las categorías iniciales son antecedente/condición, alergia,
-medicamento, cirugía, embarazo y otro.
+Memory is tied to `persona_id`, never to `session_id`, the browser or a conversation. The initial categories are
+antecedent/condition, allergy, medication, surgery, pregnancy and other.
 
-Cada registro tendrá valor legible, detalles JSON opcionales, estado vigente o
-resuelto, origen `user_confirmed`, consentimiento y marcas de tiempo.
+Each record has a readable value, optional JSON details, a current or resolved status, the origin `user_confirmed`,
+consent and timestamps.
 
-Reglas:
+Rules:
 
-- El modelo solo propone memoria cuando el paciente pide recordar un dato.
-- El paciente debe confirmar antes de guardar.
-- La memoria debe poder revisarse, editarse y eliminarse.
-- `IPS_OFICIAL` prevalece sobre `WAYLO_CONFIRMADO` ante conflictos.
-- Un dato recordado no reemplaza la evaluación de síntomas actuales.
-- La memoria no autoriza diagnósticos, prescripciones ni decisiones de urgencia.
+- The model proposes memory only when the patient asks to remember a fact.
+- The patient must confirm before it is saved.
+- Memory must be reviewable, editable and deletable.
+- `IPS_OFICIAL` takes precedence over `WAYLO_CONFIRMADO` on conflicts.
+- A remembered fact does not replace the evaluation of current symptoms.
+- Memory does not authorize diagnoses, prescriptions or urgency decisions.
 
-## Contratos
+## Contracts
 
-El BFF enviará al backend un payload interno que conserva `model`, `temperature`,
-`system` y `messages`, y añade:
+The BFF sends the backend an internal payload that keeps `model`, `temperature`, `system` and `messages`, and adds:
 
 ```json
 {
-  "external_subject": "id-de-sesion-waylo",
-  "pending_appointment_token": "token-opaco-temporal"
+  "external_subject": "waylo-session-id",
+  "pending_appointment_token": "temporary-opaque-token"
 }
 ```
 
-El backend puede devolver:
+The backend may return:
 
 ```json
 {
@@ -114,39 +107,35 @@ El backend puede devolver:
 }
 ```
 
-El token pendiente vive únicamente en memoria del estado del chat y se elimina al
-confirmar, rechazar, cambiar de conversación o cerrar la sesión.
+The pending token lives only in the chat state's memory and is removed on confirming, rejecting, switching conversation or
+closing the session.
 
-## Seguridad y privacidad
+## Security and privacy
 
-- Las claves internas, del proveedor y de la IPS permanecen server-side.
-- El navegador nunca recibe tokens de Confianza.
-- El modelo recibe únicamente resultados normalizados y necesarios.
-- Las operaciones de escritura requieren confirmación explícita.
-- Los errores de IPS degradan de forma controlada y no generan datos inventados.
-- La eliminación de cuenta elimina la memoria local persistente.
+- The internal, provider and IPS keys stay server-side.
+- The browser never receives Confianza tokens.
+- The model receives only normalized, necessary results.
+- Write operations require explicit confirmation.
+- IPS errors degrade in a controlled way and do not produce invented data.
+- Deleting the account deletes the persistent local memory.
 
-## Validaciones de aceptación
+## Acceptance checks
 
-- Una pregunta de citas con vínculo activo utiliza el backend y no llama Reto desde
-  `waylo.ai`.
-- Una pregunta de citas sin vínculo produce una respuesta controlada.
-- El agente puede usar todas las tools patient-scoped aprobadas por el backend.
-- Crear, cancelar y reprogramar nunca ejecutan la primera propuesta.
-- La segunda solicitud solo ejecuta la misma acción si el paciente confirma.
-- Una red flag evita llamadas IPS y tools antes de la respuesta urgente.
-- Una memoria confirmada aparece en una conversación posterior del mismo paciente.
-- Una memoria no confirmada nunca se persiste.
-- Editar, eliminar cuenta o borrar memoria elimina el dato persistente.
-- No se persisten conversaciones completas ni adjuntos.
+- A question about appointments with an active link uses the backend and does not call Reto from `waylo.ai`.
+- A question about appointments without a link produces a controlled answer.
+- The agent can use every patient-scoped tool the backend approves.
+- Creating, cancelling and rescheduling never execute on the first proposal.
+- The second request executes the same action only if the patient confirms.
+- A red flag avoids IPS calls and tools before the urgent answer.
+- A confirmed memory shows up in a later conversation of the same patient.
+- An unconfirmed memory is never persisted.
+- Editing, deleting the account or clearing memory removes the persistent data.
+- No full conversations or attachments are persisted.
 
-## Riesgos y pendientes operativos
+## Risks and operational pending items
 
-- Production y Preview deben tener alineadas `WAYLO_BACKEND_URL`,
-  `WAYLO_BACKEND_KEY`, `WAYLO_INTERNAL_KEY`, `RETO_KEY` y la configuración de
-  Confianza. Los valores nunca se documentan.
-- La fila `confianza` debe estar activa en la base del backend.
-- El flujo conectado requiere una cuenta sintética de Confianza y una prueba E2E
-  separada de los tests unitarios.
-- La memoria clínica y las reglas de triage requieren revisión profesional antes
-  de presentarse como protocolo clínico de producción.
+- Production and Preview must have `WAYLO_BACKEND_URL`, `WAYLO_BACKEND_KEY`, `WAYLO_INTERNAL_KEY`, `RETO_KEY` and the
+  Confianza configuration aligned. The values are never documented.
+- The `confianza` row must be active in the backend's database.
+- The connected flow needs a synthetic Confianza account and an end-to-end test separate from the unit tests.
+- Clinical memory and the triage rules need professional review before being presented as a production clinical protocol.

@@ -1,33 +1,33 @@
-name: Proponer una mejora
-description: Una idea para que Waylo oriente mejor o sea más fácil de usar.
-title: "[Propuesta] "
+name: Suggest an improvement
+description: An idea to help Waylo guide better or be easier to use.
+title: "[Idea] "
 labels: ["enhancement"]
 body:
   - type: textarea
-    id: problema
+    id: problem
     attributes:
-      label: ¿Qué problema resuelve?
-      description: Cuéntanos a quién le pasa y en qué momento.
-      placeholder: A una persona mayor le cuesta escribir los síntomas…
+      label: What problem does it solve?
+      description: Tell us who it affects and when.
+      placeholder: An older person finds it hard to type their symptoms...
     validations:
       required: true
   - type: textarea
-    id: propuesta
+    id: proposal
     attributes:
-      label: ¿Cómo lo imaginas?
+      label: How do you picture it?
     validations:
       required: true
   - type: textarea
-    id: alternativas
+    id: alternatives
     attributes:
-      label: ¿Qué alternativas consideraste?
+      label: What alternatives did you consider?
   - type: checkboxes
-    id: limites
+    id: limits
     attributes:
-      label: Límites de Waylo
-      description: Waylo orienta, no diagnostica ni receta.
+      label: Waylo's limits
+      description: Waylo guides; it does not diagnose or prescribe.
       options:
-        - label: La propuesta no hace que Waylo diagnostique, recete ni dé dosis o remedios.
+        - label: The idea does not make Waylo diagnose, prescribe or give doses or home remedies.
           required: true
-        - label: No requiere guardar el texto de las conversaciones ni datos de salud sin consentimiento.
+        - label: It does not require storing conversation text or health data without consent.
           required: false
