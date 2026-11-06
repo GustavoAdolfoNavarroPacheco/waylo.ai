@@ -1,53 +1,51 @@
-# Política de seguridad
+# Security policy
 
-Waylo atiende a personas que describen cómo se sienten, así que la seguridad y la privacidad son parte del producto. Si
-encuentras una vulnerabilidad, queremos saberlo y corregirla con calma.
+Waylo serves people who describe how they feel, so security and privacy are part of the product. If you find a
+vulnerability, we want to know and to fix it calmly.
 
-## Cómo reportar una vulnerabilidad
+## How to report a vulnerability
 
-**No abras una incidencia pública.** Usa el reporte privado de GitHub:
+**Do not open a public issue.** Use GitHub's private reporting:
 
-1. Ve a la pestaña [**Security**](https://github.com/GustavoAdolfoNavarroPacheco/waylo.ai/security) del repositorio.
-2. Pulsa **Report a vulnerability**.
-3. Describe el problema, los pasos para reproducirlo y su posible impacto.
+1. Go to the [**Security**](https://github.com/GustavoAdolfoNavarroPacheco/waylo.ai/security) tab of the repository.
+2. Click **Report a vulnerability**.
+3. Describe the problem, the steps to reproduce it and its likely impact.
 
-Si no puedes usar ese canal, escribe a los mantenedores mediante un mensaje directo en GitHub a
-[@GustavoAdolfoNavarroPacheco](https://github.com/GustavoAdolfoNavarroPacheco) pidiendo un canal privado; no incluyas los
-detalles técnicos en un canal público.
+If you cannot use that channel, send the maintainers a direct message on GitHub to
+[@GustavoAdolfoNavarroPacheco](https://github.com/GustavoAdolfoNavarroPacheco) asking for a private channel; do not put
+the technical details in a public place.
 
-## Qué esperar
+## What to expect
 
-- Acusaremos recibo y te avisaremos cuando la hayamos revisado, a la mayor brevedad posible.
-- Te mantendremos informado de la corrección y, si lo deseas, te daremos crédito al publicarla.
-- Pedimos tiempo razonable para corregir antes de cualquier divulgación pública.
+- We will acknowledge receipt and tell you once we have reviewed it, as soon as we can.
+- We will keep you informed about the fix and, if you wish, credit you when it is published.
+- We ask for reasonable time to fix the issue before any public disclosure.
 
-## Qué versiones reciben correcciones
+## Which versions get fixes
 
-Solo la rama `main` y el despliegue de producción en [waylo-ai.vercel.app](https://waylo-ai.vercel.app). El proyecto aún no
-publica versiones etiquetadas.
+Only the `main` branch and the production deployment at [waylo-ai.vercel.app](https://waylo-ai.vercel.app). The project does
+not publish tagged versions yet.
 
-## Qué nos interesa
+## What we are interested in
 
-Sesiones y autenticación, exposición de claves o tokens, acceso a datos de otra persona, saltos de las señales de alarma
-o de los límites clínicos (que Waylo diagnostique o recete), inyección en el modelo que filtre datos, y fallos en la
-integración con la IPS.
+Sessions and authentication, exposure of keys or tokens, access to another person's data, ways around the warning signs or
+the clinical limits (Waylo diagnosing or prescribing), model injection that leaks data, and failures in the IPS integration.
 
-## Qué no incluir en tu reporte
+## What not to include in your report
 
-**Nunca** adjuntes datos reales de pacientes, historias clínicas, documentos de identidad, contraseñas, claves ni tokens
-vivos. Usa datos sintéticos o enmascarados.
+**Never** attach real patient data, medical records, identity documents, passwords, keys or live tokens. Use synthetic or
+masked data.
 
-## Cómo protegemos la información
+## How we protect information
 
-- Las claves (`WAYLO_BACKEND_KEY`, `RETO_KEY`, webhooks) viven solo en el servidor y nunca llevan el prefijo `NEXT_PUBLIC_`.
-- El navegador nunca recibe el token de la IPS: las rutas `/api/ips/*` y `/api/triage` delegan en un backend privado.
-- Las señales de alarma se evalúan **antes** del modelo y no consultan datos institucionales.
-- Las conversaciones se guardan en el navegador de la persona, no en el servidor; la memoria clínica solo incluye lo que la
-  persona confirmó y puede borrarla.
-- Los avisos de error que van a Discord ocultan contraseñas, tokens, claves largas y correos, y nunca incluyen el texto de
-  la conversación.
-- Los archivos `.env*` están en `.gitignore`; solo se versiona `.env.example`.
+- Keys (`WAYLO_BACKEND_KEY`, `RETO_KEY`, webhooks) live only on the server and never carry the `NEXT_PUBLIC_` prefix.
+- The browser never receives the IPS token: the `/api/ips/*` and `/api/triage` routes delegate to a private backend.
+- Warning signs are evaluated **before** the model and do not query institutional data.
+- Conversations are stored in the person's browser, not on the server; clinical memory only includes what the person
+  confirmed, and they can delete it.
+- Error notices sent to Discord hide passwords, tokens, long keys and emails, and never include the conversation text.
+- `.env*` files are in `.gitignore`; only `.env.example` is versioned.
 
-## Dependencias
+## Dependencies
 
-Las dependencias se vigilan con Dependabot y el código se analiza con CodeQL (ver `.github/`).
+Dependencies are watched with Dependabot and the code is analyzed with CodeQL (see `.github/`).

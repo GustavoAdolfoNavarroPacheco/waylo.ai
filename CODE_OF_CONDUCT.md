@@ -1,75 +1,73 @@
-# Código de Conducta de la comunidad
+# Community Code of Conduct
 
-## Nuestro compromiso
+## Our pledge
 
-Como personas que participan, contribuyen y mantienen este proyecto, nos comprometemos a que participar sea una experiencia
-libre de acoso para todas las personas, sin importar su edad, tamaño corporal, discapacidad visible o invisible, etnia,
-características sexuales, identidad y expresión de género, nivel de experiencia, educación, nivel socioeconómico,
-nacionalidad, apariencia personal, raza, religión u orientación sexual.
+As contributors, participants and maintainers of this project, we pledge to make participation a harassment-free experience
+for everyone, regardless of age, body size, visible or invisible disability, ethnicity, sex characteristics, gender identity
+and expression, level of experience, education, socio-economic status, nationality, personal appearance, race, religion or
+sexual orientation.
 
-Nos comprometemos a actuar e interactuar de maneras que contribuyan a una comunidad abierta, acogedora, diversa, inclusiva
-y saludable.
+We pledge to act and interact in ways that contribute to an open, welcoming, diverse, inclusive and healthy community.
 
-## Nuestros estándares
+## Our standards
 
-Ejemplos de comportamiento que contribuyen a un ambiente positivo:
+Examples of behavior that contributes to a positive environment:
 
-- Demostrar empatía y amabilidad hacia las demás personas.
-- Respetar opiniones, puntos de vista y experiencias distintos.
-- Dar y aceptar con elegancia comentarios constructivos.
-- Asumir la responsabilidad de los errores, disculparnos con quienes se vieron afectadas y aprender de la experiencia.
-- Centrarnos en lo que es mejor para la comunidad, no solo para cada quien.
+- Demonstrating empathy and kindness toward other people.
+- Being respectful of differing opinions, viewpoints and experiences.
+- Giving and gracefully accepting constructive feedback.
+- Accepting responsibility for our mistakes, apologizing to those affected and learning from the experience.
+- Focusing on what is best for the community, not just for each of us.
 
-Ejemplos de comportamiento inaceptable:
+Examples of unacceptable behavior:
 
-- El uso de lenguaje o imágenes sexualizadas y la atención o los avances sexuales de cualquier tipo.
-- Los comentarios insultantes o despectivos, y los ataques personales o políticos.
-- El acoso público o privado.
-- Publicar información privada de otras personas, como direcciones físicas o de correo, sin su permiso explícito.
-- **Publicar datos reales de pacientes, historias clínicas o documentos de identidad.** Es una falta grave en este proyecto.
-- Otras conductas que razonablemente se considerarían inapropiadas en un entorno profesional.
+- The use of sexualized language or imagery, and sexual attention or advances of any kind.
+- Trolling, insulting or derogatory comments, and personal or political attacks.
+- Public or private harassment.
+- Publishing others' private information, such as a physical or email address, without their explicit permission.
+- **Publishing real patient data, medical records or identity documents.** This is a serious offense in this project.
+- Other conduct that could reasonably be considered inappropriate in a professional setting.
 
-## Responsabilidades de quienes mantienen el proyecto
+## Enforcement responsibilities
 
-Quienes mantienen el proyecto son responsables de aclarar y hacer cumplir los estándares y tomarán medidas correctivas
-apropiadas y justas ante cualquier comportamiento que consideren inapropiado, amenazante, ofensivo o dañino.
+Project maintainers are responsible for clarifying and enforcing our standards and will take appropriate and fair corrective
+action in response to any behavior that they deem inappropriate, threatening, offensive or harmful.
 
-Tienen el derecho y la responsabilidad de eliminar, editar o rechazar comentarios, commits, código, ediciones de wiki,
-incidencias y otras contribuciones que no se ajusten a este Código de Conducta, y de comunicar las razones de sus decisiones
-cuando corresponda.
+They have the right and responsibility to remove, edit or reject comments, commits, code, wiki edits, issues and other
+contributions that do not align with this Code of Conduct, and will communicate reasons for moderation decisions when
+appropriate.
 
-## Alcance
+## Scope
 
-Este Código de Conducta aplica en todos los espacios de la comunidad y también cuando alguien representa oficialmente al
-proyecto en espacios públicos.
+This Code of Conduct applies within all community spaces, and also applies when an individual is officially representing the
+project in public spaces.
 
-## Aplicación
+## Enforcement
 
-Los casos de comportamiento abusivo, acosador o inaceptable pueden reportarse de forma privada a quienes mantienen el
-proyecto, mediante un mensaje directo en GitHub a
-[@GustavoAdolfoNavarroPacheco](https://github.com/GustavoAdolfoNavarroPacheco). Todas las quejas se revisarán e investigarán
-con prontitud y justicia. Quienes mantienen el proyecto están obligados a respetar la privacidad y la seguridad de quien
-reporta un incidente.
+Instances of abusive, harassing or otherwise unacceptable behavior may be reported privately to the project maintainers with
+a direct message on GitHub to [@GustavoAdolfoNavarroPacheco](https://github.com/GustavoAdolfoNavarroPacheco). All complaints
+will be reviewed and investigated promptly and fairly. Maintainers are obligated to respect the privacy and security of the
+reporter of any incident.
 
-## Guías de aplicación
+## Enforcement guidelines
 
-Al determinar las consecuencias de cualquier acción que consideren una infracción, aplicarán estas guías:
+In determining the consequences for any action they deem in violation of this Code of Conduct, maintainers will follow these
+guidelines:
 
-1. **Corrección.** *Impacto:* uso de lenguaje inapropiado u otra conducta considerada poco profesional o desagradable.
-   *Consecuencia:* un aviso privado y por escrito, con claridad sobre la naturaleza de la infracción y una explicación de por
-   qué el comportamiento fue inapropiado. Puede pedirse una disculpa pública.
-2. **Advertencia.** *Impacto:* una infracción por un incidente único o por una serie de acciones. *Consecuencia:* una
-   advertencia con consecuencias por la conducta continuada. Sin interacción con las personas implicadas, incluida la
-   interacción no solicitada con quienes aplican el Código, durante un período determinado.
-3. **Suspensión temporal.** *Impacto:* una infracción grave, incluido el comportamiento inapropiado sostenido.
-   *Consecuencia:* una suspensión temporal de cualquier tipo de interacción o comunicación pública con la comunidad durante
-   un período determinado.
-4. **Suspensión permanente.** *Impacto:* un patrón de infracciones, incluido el comportamiento inapropiado sostenido, el
-   acoso a una persona o la agresión o el menosprecio de grupos de personas. *Consecuencia:* una suspensión permanente de
-   cualquier tipo de interacción pública dentro de la comunidad.
+1. **Correction.** *Impact:* use of inappropriate language or other behavior deemed unprofessional or unwelcome.
+   *Consequence:* a private, written warning, with clarity around the nature of the violation and an explanation of why the
+   behavior was inappropriate. A public apology may be requested.
+2. **Warning.** *Impact:* a violation through a single incident or a series of actions. *Consequence:* a warning with
+   consequences for continued behavior. No interaction with the people involved, including unsolicited interaction with those
+   enforcing the Code of Conduct, for a specified period of time.
+3. **Temporary ban.** *Impact:* a serious violation, including sustained inappropriate behavior. *Consequence:* a temporary
+   ban from any sort of interaction or public communication with the community for a specified period of time.
+4. **Permanent ban.** *Impact:* a pattern of violation, including sustained inappropriate behavior, harassment of an
+   individual, or aggression toward or disparagement of classes of individuals. *Consequence:* a permanent ban from any sort
+   of public interaction within the community.
 
-## Atribución
+## Attribution
 
-Este Código de Conducta es una adaptación al español del [Contributor Covenant](https://www.contributor-covenant.org),
-versión 2.1, disponible en https://www.contributor-covenant.org/version/2/1/code_of_conduct.html, publicado bajo licencia
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+This Code of Conduct is adapted from the [Contributor Covenant](https://www.contributor-covenant.org), version 2.1, available
+at https://www.contributor-covenant.org/version/2/1/code_of_conduct.html, published under the
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) license.

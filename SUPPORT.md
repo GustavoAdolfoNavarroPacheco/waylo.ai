@@ -1,22 +1,21 @@
-# Ayuda y soporte
+# Help and support
 
-## ¿Tienes una duda sobre cómo usar Waylo?
+## Do you have a question about how to use Waylo?
 
-Empieza por el [README](./README.md) y la [documentación](./docs/README.md). Para preguntas que no estén resueltas ahí, abre
-una [incidencia](https://github.com/GustavoAdolfoNavarroPacheco/waylo.ai/issues/new/choose) con la etiqueta `pregunta`.
+Start with the [README](./README.md) and the [documentation](./docs/README.md). For questions not answered there, open an
+[issue](https://github.com/GustavoAdolfoNavarroPacheco/waylo.ai/issues/new/choose) with the `question` label.
 
-## ¿Encontraste un error?
+## Did you find a bug?
 
-Abre una [incidencia de error](https://github.com/GustavoAdolfoNavarroPacheco/waylo.ai/issues/new?template=bug_report.yml)
-con los pasos para reproducirlo. Si lo que ves es una **vulnerabilidad**, no la publiques: sigue [SECURITY.md](./SECURITY.md).
+Open a [bug report](https://github.com/GustavoAdolfoNavarroPacheco/waylo.ai/issues/new?template=bug_report.yml) with the
+steps to reproduce it. If what you see is a **vulnerability**, do not publish it: follow [SECURITY.md](./SECURITY.md).
 
-## ¿Tienes una idea?
+## Do you have an idea?
 
-Cuéntala en una [propuesta](https://github.com/GustavoAdolfoNavarroPacheco/waylo.ai/issues/new?template=feature_request.yml).
+Tell us in a [feature request](https://github.com/GustavoAdolfoNavarroPacheco/waylo.ai/issues/new?template=feature_request.yml).
 
-## Si lo que sientes es urgente
+## If what you feel is urgent
 
-Waylo es una herramienta de orientación y **no atiende emergencias**. Si tú o alguien cerca presenta dolor u opresión en el
-pecho, dificultad grave para respirar, parálisis o debilidad repentina en un lado del cuerpo, alteración del habla, sangrado
-que no para, pérdida del conocimiento o pensamientos de hacerse daño, acude de inmediato a Urgencias o llama a la línea de
-emergencias de tu ciudad.
+Waylo is a guidance tool and **does not handle emergencies**. If you or someone near you has chest pain or pressure, severe
+difficulty breathing, sudden paralysis or weakness on one side of the body, speech changes, bleeding that will not stop,
+loss of consciousness or thoughts of self-harm, go to the emergency room right away or call your city's emergency line.
