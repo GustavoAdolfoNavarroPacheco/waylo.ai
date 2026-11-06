@@ -1,16 +1,16 @@
-# Imágenes del repositorio
+# Repository images
 
-| Archivo | Uso |
+| File | Use |
 | --- | --- |
-| `banner-light.png`, `banner-dark.png` | Banner del README (2400 × 800). Se elige según el tema de GitHub. |
-| `social-preview.png` | Imagen al compartir el enlace (1280 × 640). **Se sube a mano** en *Settings → General → Social preview*. |
-| `demo.gif` | Fragmento del video de demostración: la IPS falla y el agente se recupera. |
-| `screenshots/` | Capturas de la web real, en claro y oscuro. |
-| `banner/banner.html` | Fuente del banner y de la imagen social. |
+| `banner-light.png`, `banner-dark.png` | The README banner (2400 × 800). It is chosen by the GitHub theme. |
+| `social-preview.png` | The image shown when the link is shared (1280 × 640). **Upload it by hand** in *Settings → General → Social preview*. |
+| `demo.gif` | An excerpt of the demo video: the IPS fails and the agent recovers. |
+| `screenshots/` | Screenshots of the real web app, in light and dark. |
+| `banner/banner.html` | The source of the banner and the social image. |
 
-## Regenerar el banner y la imagen social
+## Regenerate the banner and the social image
 
-`banner/banner.html` usa los tokens, las fuentes y la mascota de la web. Se parametriza por la URL:
+`banner/banner.html` uses the web app's tokens, fonts and mascot. It is parametrized through the URL:
 
 ```text
 banner.html?theme=light&variant=banner   # 2400 x 800
@@ -18,11 +18,12 @@ banner.html?theme=dark&variant=banner
 banner.html?theme=light&variant=social   # 1280 x 640
 ```
 
-Ábrelo en un navegador con esa ventana (por ejemplo con `puppeteer-core` o las herramientas de desarrollo) y captura el
-elemento `#stage` a su tamaño real. Las fuentes se cargan de Google Fonts, así que hace falta conexión.
+Open it in a browser at that window size (for example with `puppeteer-core` or the developer tools) and capture the `#stage`
+element at its real size. The fonts load from Google Fonts, so a connection is needed.
 
-## Regenerar las capturas
+## Regenerate the screenshots
 
-Con la web corriendo en `http://localhost:3000` (`npm run build && npm start`), captura `/`, `/chat` y las secciones
-`#home-steps` y `#home-faq` en 1440 × 900 (factor de escala 1,5), con el esquema de color claro y oscuro, y en 390 × 844
-(factor 2) para móvil. Espera unos segundos tras cargar: la portada tiene animaciones de entrada.
+With the web app running at `http://localhost:3000` (`npm run build && npm start`), capture `/`, `/chat` and the
+`#home-steps` section at 1440 × 900 (scale factor 1.5), with the light and dark color schemes and the `Accept-Language: en`
+header so the interface is in English, and at 390 × 844 (scale factor 2) for mobile. Wait a few seconds after loading: the
+home page has entrance animations.
