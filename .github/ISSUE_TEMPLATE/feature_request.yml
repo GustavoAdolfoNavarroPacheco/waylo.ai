@@ -1,0 +1,33 @@
+name: Proponer una mejora
+description: Una idea para que Waylo oriente mejor o sea más fácil de usar.
+title: "[Propuesta] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problema
+    attributes:
+      label: ¿Qué problema resuelve?
+      description: Cuéntanos a quién le pasa y en qué momento.
+      placeholder: A una persona mayor le cuesta escribir los síntomas…
+    validations:
+      required: true
+  - type: textarea
+    id: propuesta
+    attributes:
+      label: ¿Cómo lo imaginas?
+    validations:
+      required: true
+  - type: textarea
+    id: alternativas
+    attributes:
+      label: ¿Qué alternativas consideraste?
+  - type: checkboxes
+    id: limites
+    attributes:
+      label: Límites de Waylo
+      description: Waylo orienta, no diagnostica ni receta.
+      options:
+        - label: La propuesta no hace que Waylo diagnostique, recete ni dé dosis o remedios.
+          required: true
+        - label: No requiere guardar el texto de las conversaciones ni datos de salud sin consentimiento.
+          required: false

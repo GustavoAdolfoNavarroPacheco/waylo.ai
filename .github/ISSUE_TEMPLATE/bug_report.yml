@@ -1,0 +1,72 @@
+name: Reportar un error
+description: Algo no funciona como debería.
+title: "[Error] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por ayudarnos a mejorar Waylo.
+        **Si es una vulnerabilidad de seguridad, no uses este formulario:** sigue la [política de seguridad](https://github.com/GustavoAdolfoNavarroPacheco/waylo.ai/security/policy).
+  - type: textarea
+    id: que-pasa
+    attributes:
+      label: ¿Qué está pasando?
+      description: Describe el error con tus palabras.
+      placeholder: Al enviar un mensaje con un adjunto, el chat se queda cargando.
+    validations:
+      required: true
+  - type: textarea
+    id: pasos
+    attributes:
+      label: Pasos para reproducirlo
+      value: |
+        1. Ir a '...'
+        2. Pulsar '...'
+        3. Ver el error
+    validations:
+      required: true
+  - type: textarea
+    id: esperado
+    attributes:
+      label: ¿Qué esperabas que pasara?
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: ¿En qué parte ocurre?
+      options:
+        - Portada
+        - Chat y orientación
+        - Voz (Waylo Live)
+        - Adjuntos
+        - Cuenta, registro o ingreso
+        - Configuración (EPS, memoria, preferencias)
+        - Integración con la IPS
+        - Instalación o despliegue
+        - Otra
+    validations:
+      required: true
+  - type: input
+    id: entorno
+    attributes:
+      label: Dispositivo y navegador
+      placeholder: Android 14, Chrome 130 / Windows 11, Edge 130
+  - type: dropdown
+    id: idioma
+    attributes:
+      label: Idioma de la interfaz
+      options: [Español, English, Português]
+  - type: textarea
+    id: capturas
+    attributes:
+      label: Capturas o registros
+      description: Arrastra aquí imágenes o pega el error de la consola.
+  - type: checkboxes
+    id: privacidad
+    attributes:
+      label: Privacidad
+      options:
+        - label: Confirmo que no incluyo datos reales de pacientes, documentos de identidad, claves ni tokens.
+          required: true
